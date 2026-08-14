@@ -10,9 +10,7 @@ on:
   workflow_dispatch: {}     # manual "Run workflow" button runs everything
 
 permissions:
-  contents: write   # to commit refreshed arena ranks back to the repo
-  pages: write      # to deploy the site
-  id-token: write   # for the Pages deploy
+  contents: write   # to commit refreshed data + deploy to the gh-pages branch
 
 concurrency:
   group: pages
@@ -54,10 +52,9 @@ jobs:
           git diff --cached --quiet || git commit -m "chore: refresh LMArena ranks [skip ci]"
           git push
 
-      - name: Upload site artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy site to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: public
-
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: public
+          publish_branch: gh-pages

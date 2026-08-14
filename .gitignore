@@ -1,6 +1,5 @@
 data/*
 !data/arena_raw.json
-public/data/
 node_modules/
 screenshots/
 __pycache__/
