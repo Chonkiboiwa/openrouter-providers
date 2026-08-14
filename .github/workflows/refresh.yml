@@ -1,0 +1,63 @@
+name: Refresh data + deploy
+
+# Hourly: OpenRouter pricing / providers / AI benchmarks (fetch_data.py).
+# Daily 03:30 UTC: also scrape fresh LMArena ranks (fetch_arena.js).
+# Manual (workflow_dispatch) runs both, same as the daily run.
+on:
+  schedule:
+    - cron: "0 * * * *"     # hourly, top of every hour
+    - cron: "30 3 * * *"    # daily 03:30 UTC — + arena ranks
+  workflow_dispatch: {}     # manual "Run workflow" button runs everything
+
+permissions:
+  contents: write   # to commit refreshed arena ranks back to the repo
+  pages: write      # to deploy the site
+  id-token: write   # for the Pages deploy
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install node deps (playwright-core, used by the arena scrape)
+        run: npm ci
+
+      - name: Install Chromium for the arena scrape
+        run: npx --yes playwright@1.62.1 install --with-deps chromium
+
+      - name: Fetch OpenRouter pricing + providers + AI benchmarks
+        run: python scripts/fetch_data.py
+
+      - name: Scrape LMArena ranks (daily 03:30 / manual only)
+        if: github.event.schedule == '30 3 * * *' || github.event_name == 'workflow_dispatch'
+        run: node scripts/fetch_arena.js
+
+      - name: Commit refreshed arena ranks (persists for hourly builds)
+        if: github.event.schedule == '30 3 * * *' || github.event_name == 'workflow_dispatch'
+        run: |
+          git config user.name "data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/arena_raw.json
+          git diff --cached --quiet || git commit -m "chore: refresh LMArena ranks [skip ci]"
+          git push
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

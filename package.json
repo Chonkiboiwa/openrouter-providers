@@ -1,0 +1,16 @@
+{
+  "name": "openrouter",
+  "version": "1.0.0",
+  "description": "A fully static website that shows **every OpenRouter model with all of the providers that serve it and each provider's pricing** — base list prices from OpenRouter's documented API, plus real market (effective) prices when traffic data exists. No AI backend; V1 is fully deterministic.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "playwright-core": "^1.62.1"
+  }
+}
