@@ -8,8 +8,9 @@ data exists. No AI backend; V1 is fully deterministic.
 ## How it works
 
 ```
-cron (every 15–30 min) ──► scripts/fetch_data.py ──► data/*.json ──► static frontend (public/)
-       (occasionally)  ──► scripts/fetch_arena.js ──► data/arena_raw.json ─┘
+GitHub Actions ──► scripts/fetch_data.py ──► data/*.json ──► static frontend (public/)
+   (daily 03:30 UTC) ──► scripts/fetch_arena.js ──► data/arena_raw.json ─┘
+                        └─► deploy to GitHub Pages
 ```
 
 1. **`scripts/fetch_data.py`** fetches the model catalog, then for *each* model
@@ -114,6 +115,27 @@ python -m http.server 8000 --directory public
 
 The script writes `public/data/models.json`, so the whole `public/` folder is
 self-contained and can be pushed to GitHub Pages / Netlify as-is.
+
+## Automated refresh (GitHub Actions, free)
+
+Live at **<https://teabagger2002.github.io/openrouter-providers/>** (repo:
+<https://github.com/teabagger2002/openrouter-providers>). The workflow in
+`.github/workflows/refresh.yml` runs on GitHub's free tier:
+
+- **Hourly** (`0 * * * *`): `fetch_data.py` — OpenRouter pricing, providers,
+  uptime, and the AI benchmarks (they ride in OpenRouter's models API).
+- **Daily 03:30 UTC** (`30 3 * * *`): additionally `fetch_arena.js` — fresh
+  LMArena ranks via headless Chromium, committed back to the repo so hourly
+  builds keep the ranks.
+- Each run uploads `public/` and deploys it to **GitHub Pages**.
+- `workflow_dispatch` runs both jobs on demand from the Actions tab.
+
+Run it locally the same way the workflow does:
+
+```bash
+python scripts/fetch_data.py          # hourly job
+node scripts/fetch_arena.js           # daily job (needs Chrome / playwright chromium)
+```
 
 ## Scoring layer (archived)
 
