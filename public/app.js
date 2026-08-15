@@ -329,10 +329,9 @@ function renderHero() {
           <span class="ptitle">${escapeHtml(r.name || r.id)}</span>
           <span class="pid">${escapeHtml(r.id)}</span>
         </div>
-        <span class="poverall">${s.overall != null ? s.overall : "—"}<span class="psuffix">/100</span></span>
       </div>
       <div class="pbars">${scoreBars(r)}</div>
-      <div class="pfoot">${tileFoot(r)}</div>
+      <div class="pfoot"><span class="poverall">${s.overall != null ? s.overall : "—"}<span class="psuffix">/100</span></span>${tileFoot(r)}</div>
       ${open ? `<div class="p-providers">${providerCards(r)}</div>` : ""}
     </article>`;
     }).join("") +
@@ -356,7 +355,8 @@ function modelTile(r, idx) {
     <div class="mtop">
       ${modelIcon(r)}
       <div class="mname-wrap">
-        <span class="mtname">${escapeHtml(r.name || r.id)}${free ? '<span class="badge free">FREE</span>' : ""}</span>
+        <span class="mtname">${escapeHtml(r.name || r.id)}</span>
+        ${free ? '<span class="badge free">FREE</span>' : ""}
         <span class="mtid">${escapeHtml(r.id)}</span>
       </div>
       <div class="mright">
