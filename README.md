@@ -118,8 +118,8 @@ self-contained and can be pushed to GitHub Pages / Netlify as-is.
 
 ## Automated refresh (GitHub Actions, free)
 
-Live at **<https://teabagger2002.github.io/openrouter-providers/>** (repo:
-<https://github.com/teabagger2002/openrouter-providers>). The workflow in
+Live at **<https://chonkiboiwa.github.io/openrouter-providers/>** (repo:
+<https://github.com/Chonkiboiwa/openrouter-providers>). The workflow in
 `.github/workflows/refresh.yml` runs on GitHub's free tier:
 
 - **Hourly** (`0 * * * *`): `fetch_data.py` — OpenRouter pricing, providers,
