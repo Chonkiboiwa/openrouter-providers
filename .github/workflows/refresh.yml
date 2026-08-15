@@ -41,6 +41,7 @@ jobs:
 
       - name: Scrape LMArena ranks (daily 03:30 / manual only)
         if: github.event.schedule == '30 3 * * *' || github.event_name == 'workflow_dispatch'
+        continue-on-error: true   # never block the deploy on the enrichment scrape
         run: node scripts/fetch_arena.js
 
       - name: Commit refreshed arena ranks (persists for hourly builds)
