@@ -54,6 +54,12 @@ jobs:
           git diff --cached --quiet || git commit -m "chore: refresh LMArena ranks [skip ci]"
           git push
 
+      - name: Cache-bust assets with the commit SHA
+        run: |
+          SHA=$(git rev-parse --short HEAD)
+          sed -i "s|href=\"style.css\"|href=\"style.css?v=$SHA\"|" public/index.html
+          sed -i "s|src=\"app.js\"|src=\"app.js?v=$SHA\"|" public/index.html
+
       - name: Deploy site to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
