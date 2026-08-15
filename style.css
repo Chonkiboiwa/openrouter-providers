@@ -884,6 +884,7 @@ footer b { color: var(--ochre); font-weight: 600; }
   .providers-grid { grid-template-columns: 1fr; }
   .pcard { padding: 14px 16px; }
   .pname { max-width: none; }
+}
 
 /* ── single page: chart tabs + tile grid ───────────────────── */
 
@@ -1109,5 +1110,4 @@ footer b { color: var(--ochre); font-weight: 600; }
   .chart-source { white-space: normal; }
   .ptitle { font-size: 20px; }
   .poverall { font-size: 28px; }
-}
 }
