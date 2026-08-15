@@ -51,29 +51,33 @@ logo.
 
 The site is a light, paper-toned data desk — quiet greens and ochre,
 serif-display headlines, mono numerals, and nothing decorative. It's a
-**single page**: a top-3 hero plus a tile grid, re-ranked live by the
-selected tab.
+**single page in three sections**: a podium of the top-3 overall models,
+a bar chart, and the full row-wise model list — everything re-ranked
+live by the selected tab.
 
-- **Top 3 hero** — three **huge tiles** for the best models under the
-  active ranking. Clicking a tile expands its providers in place.
-- **Tabs** — **Overall** (default), **AI test**, **Arena**, **Price**.
-  The tab re-ranks the hero *and* the grid below: by the blended score,
-  Intelligence Index, LMArena rank, or cheapest blended `$/1M` (free
-  first).
+- **Podium (top)** — three **huge tiles** for the best models overall:
+  medal, logo, full model name, the blended `/100` score, three pillar
+  bars (Value / AI test / Arena), best price, and **Arena # / AI #**
+  ranks. Clicking a tile expands its providers in place.
+- **Chart (middle)** — a **bar chart** of the top N models, re-ranked by
+  the active tab: **Overall** (default), **AI test**, **Arena**, or
+  **Price** (cheapest blended `$/1M`, free first).
+- **Rows (bottom)** — the **dense model list**, ranked by the same tab,
+  with the matching columns (Overall / Value / AI / Arena / best price /
+  provider count; AI-test and arena tabs show their own columns plus
+  cross-ranks). Click a row to expand its **provider cards**, cheapest
+  first: each provider's logo, price, and two raw **uptime** meters — the
+  24h and 30m windows exactly as OpenRouter reports them. These are
+  endpoint *availability* numbers, not quality scores: ~1/3 of provider
+  rows sit below 99% and some at 0%, but they say nothing about
+  output-quality drops or rate limiting.
 - **The blended score** — each pillar (bang-for-buck, AI-test, arena) is
   normalized to 0–100 and averaged with equal weights; pillars a model
   lacks simply drop out of its average, so new models can still compete
-  (tie-break: more pillars, then value). Every tile shows the three pillar
-  bars plus the model's **Arena # / AI #** ranks and best price.
-- **The grid** — one **tile per model**: logo, name, score bars, best
-  `$/1M` (market vs base), and ranks. Click a tile for its **provider
-  cards**, cheapest first: each provider's logo, price, and two raw
-  **uptime** meters — the 24h and 30m windows exactly as OpenRouter
-  reports them. These are endpoint *availability* numbers, not quality
-  scores: ~1/3 of provider rows sit below 99% and some at 0%, but they say
-  nothing about output-quality drops or rate limiting.
+  (tie-break: more pillars, then value). The podium always shows the
+  **top-3 overall**; the tabs re-rank the chart and rows.
 - **Filters** — a **Min Intel** slider (default 50) excludes low-quality
-  cheap models, and **Show top N** limits the grid (default 20).
+  cheap models, and **Show top N** limits the chart (default 20).
 
 ## Ranking sources
 

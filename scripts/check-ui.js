@@ -57,35 +57,43 @@ async function main() {
 
   await page.goto(BASE, { waitUntil: "networkidle" });
   await page.waitForSelector(".ptile");
-  await snap("1-default.png"); // hero + tile grid
+  await snap("1-default.png"); // podium + chart + rows
 
+  // expand a podium tile → providers
   await page.click(".ptile");
   await page.waitForSelector(".ptile .p-providers");
-  await snap("2-expanded.png");
+  await snap("2-podium-expanded.png");
   await page.click(".ptile.open"); // collapse
+  await page.waitForTimeout(150);
+
+  // expand a table row → providers
+  await page.click("#tbody tr.main");
+  await page.waitForSelector(".providers-row .providers");
+  await snap("3-row-expanded.png");
+  await page.click("#tbody tr.main.expanded"); // collapse
   await page.waitForTimeout(150);
 
   await page.fill("#search", "claude");
   await page.waitForTimeout(350);
-  await snap("3-search.png");
+  await snap("4-search.png");
   await page.fill("#search", "");
   await page.waitForTimeout(200);
 
-  // tab toggles re-rank the hero + grid
+  // tab toggles re-rank the chart + rows
   for (const tab of ["ai", "arena", "price"]) {
     await page.click(`#chartTabs .mode-btn[data-tab="${tab}"]`);
     await page.waitForTimeout(300);
-    await snap(`4-${tab}.png`);
-    await page.click(".mtile");
-    await page.waitForSelector(".mtile .p-providers");
+    await snap(`5-${tab}.png`);
+    await page.click("#tbody tr.main");
+    await page.waitForSelector(".providers-row .providers");
     await page.waitForTimeout(250);
-    await snap(`5-${tab}-expanded.png`);
-    await page.click(".mtile.open");
+    await snap(`6-${tab}-expanded.png`);
+    await page.click("#tbody tr.main.expanded");
     await page.waitForTimeout(150);
   }
   await page.click('#chartTabs .mode-btn[data-tab="overall"]');
   await page.waitForTimeout(250);
-  await snap("6-overall.png");
+  await snap("7-overall.png");
 
   // min-intel filter still applies
   await page.evaluate(() => {
@@ -94,7 +102,7 @@ async function main() {
     s.dispatchEvent(new Event("input", { bubbles: true }));
   });
   await page.waitForTimeout(250);
-  await snap("7-minintel-0.png");
+  await snap("8-minintel-0.png");
   await page.evaluate(() => {
     const s = document.getElementById("minIntel");
     s.value = "50";
@@ -105,22 +113,22 @@ async function main() {
   // narrow desktop — where clipping shows up most
   await page.setViewportSize({ width: 1100, height: 800 });
   await page.waitForTimeout(250);
-  await snap("8-narrow.png");
-  await page.click(".mtile");
-  await page.waitForSelector(".mtile .p-providers");
+  await snap("9-narrow.png");
+  await page.click(".ptile");
+  await page.waitForSelector(".ptile .p-providers");
   await page.waitForTimeout(250);
-  await snap("9-narrow-expanded.png");
-  await page.click(".mtile.open"); // collapse before resizing
+  await snap("10-narrow-podium-expanded.png");
+  await page.click(".ptile.open"); // collapse before resizing
   await page.waitForTimeout(150);
 
-  // mobile — tiles stack to one column
+  // mobile — podium stacks, rows become cards
   await page.setViewportSize({ width: 390, height: 844 });
   await page.waitForTimeout(250);
-  await snap("10-mobile.png");
-  await page.click(".mtile");
-  await page.waitForSelector(".mtile .p-providers");
+  await snap("11-mobile.png");
+  await page.click("#tbody tr.main");
+  await page.waitForSelector(".providers-row .providers");
   await page.waitForTimeout(250);
-  await snap("11-mobile-expanded.png");
+  await snap("12-mobile-expanded.png");
 
   await browser.close();
 

@@ -886,89 +886,22 @@ footer b { color: var(--ochre); font-weight: 600; }
   .pname { max-width: none; }
 }
 
-/* ── single page: chart tabs + tile grid ───────────────────── */
+/* ── single page: chart tabs ───────────────────────────────── */
 
 .chart-tabs { margin: 0 0 4px; }
 
-.tile-grid-wrap { margin: 0 0 22px; }
-.tile-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 12px;
-}
+/* ── podium panel — top-3 hero tiles ───────────────────────── */
 
-.mtile {
-  position: relative;
+.podium-panel {
+  margin-top: 4px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 16px 18px 14px;
-  cursor: pointer;
+  border-radius: 12px;
   box-shadow: var(--shadow);
-  transition: transform 0.15s, border-color 0.15s;
-  min-width: 0;
+  padding: 18px 20px 16px;
+  animation: fade-up 0.5s ease both;
 }
-.mtile:hover { transform: translateY(-2px); border-color: var(--border-strong); }
-.mtile.open { cursor: default; }
-
-.mtop { display: flex; align-items: center; gap: 12px; min-width: 0; }
-.mtile .logo-tile, .mtile .avatar.micon { width: 44px; height: 44px; border-radius: 12px; }
-.mname-wrap { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
-.mtname {
-  font-family: var(--display);
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  width: 100%;
-}
-.mtid {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  color: var(--faint);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.mright {
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 1px;
-}
-.moverall {
-  font-family: var(--mono);
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--green-ink);
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
-  white-space: nowrap;
-}
-.mtrank {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  font-weight: 600;
-  color: var(--faint);
-  font-variant-numeric: tabular-nums;
-}
-
-.mtile .pbars { margin-top: 12px; gap: 6px; }
-.mtile .pbar { grid-template-columns: 52px 1fr 30px; gap: 9px; }
-.mtile .pfoot { margin-top: 12px; padding-top: 10px; font-size: 12.5px; }
-.mtile .p-providers { margin-top: 12px; padding-top: 12px; }
-
-@media (max-width: 860px) {
-  .tile-grid { grid-template-columns: 1fr; }
-  .mtname { font-size: 16px; }
-}
-
-/* ── podium — top-3 hero tiles ─────────────────────────────── */
+.podium-panel .chart-head { margin-bottom: 10px; }
 
 .podium {
   display: grid;
