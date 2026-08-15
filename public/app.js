@@ -1,39 +1,35 @@
-/* OpenRouter Providers — static frontend. Reads data/models.json. */
+/* OpenRouter Providers — static frontend. Reads data/models.json.
+   One page: a top-3 hero + a tile grid, re-ranked by the selected tab
+   (overall / AI test / arena / price). Click a tile for its providers. */
 "use strict";
-
-const COLS = [
-  { key: "name", label: "Model", sortable: true, sortVal: (r) => (r.name || r.id).toLowerCase() },
-  { key: "author", label: "Author", sortable: true, sortVal: (r) => (r.author || "").toLowerCase() },
-  { key: "context", label: "Context", sortable: true },
-  { key: "best", label: "Best $/1M", sortable: true, sortVal: (r) => bestCost(r) },
-  { key: "providers", label: "Providers", sortable: true, sortVal: (r) => r.provider_count },
-  { key: "ranks", label: "Ranks", sortable: false },
-];
 
 const IO_RATIO = 3.0;
 
-/* comparison modes — how the table is ranked when not browsing */
-const MODES = {
-  ai: {
-    note: "Artificial Analysis Intelligence Index, highest first",
-    dir: -1,
-    filter: (r) => r.intel != null,
-    sort: (a, b) => b.intel - a.intel,
-    metricKey: "intel",
-  },
-  arena: {
-    note: "LMArena human-preference votes, #1 = most preferred",
-    dir: 1,
-    filter: (r) => r.arena_rank != null,
-    sort: (a, b) => a.arena_rank - b.arena_rank,
-    metricKey: "arena",
-  },
-  podium: {
-    note: "Equal-weight blend of value, AI-test, and arena scores",
-    dir: -1,
+/* the single view — the hero + grid rank by the selected tab */
+const TABS = {
+  overall: {
+    label: "Overall",
+    note: "equal-weight blend of value, AI-test, and arena scores",
     filter: (r) => r._scores && r._scores.overall != null,
     sort: podiumSort,
-    metricKey: "overall",
+  },
+  ai: {
+    label: "AI test",
+    note: "Intelligence Index, highest first",
+    filter: (r) => r.intel != null,
+    sort: (a, b) => b.intel - a.intel,
+  },
+  arena: {
+    label: "Arena",
+    note: "LMArena human-preference votes, #1 = most preferred",
+    filter: (r) => r.arena_rank != null,
+    sort: (a, b) => a.arena_rank - b.arena_rank,
+  },
+  price: {
+    label: "Price",
+    note: "cheapest blended $/1M at the best provider, free first",
+    filter: (r) => isFinite(bestCost(r)),
+    sort: (a, b) => bestCost(a) - bestCost(b),
   },
 };
 
@@ -50,18 +46,11 @@ function podiumSort(a, b) {
 let state = {
   rows: [],
   search: "",
-  sortKey: "providers",
-  sortDir: -1,
-  expanded: new Set(),
-  podiumOpen: new Set(),
-  mode: "podium", // podium | browse | ai | arena
+  tab: "overall", // overall | ai | arena | price
+  expanded: new Set(), // tiles whose providers are shown
   minIntel: 50, // default filter: only models with Intel Index >= 50
-  topN: 12, // how many bars the chart shows (per-page default, user-tunable)
-  topNSet: {}, // pages whose per-page default has been applied
-  topNUserSet: false, // true once the user touches the control — then it sticks
+  topN: 20, // how many tiles the grid shows (user-tunable)
 };
-
-const TOPN_DEFAULTS = { podium: 10, browse: 12, ai: 15, arena: 15 };
 
 /* ── data helpers ─────────────────────────────────────────────────────── */
 
@@ -95,28 +84,9 @@ function fmtMoney(v) {
   return `$${v.toFixed(2)}`;
 }
 
-function fmtNum(v) {
-  if (v == null || isNaN(v)) return "—";
-  return Number.isInteger(v) ? v.toLocaleString() : v.toLocaleString(undefined, { maximumFractionDigits: 1 });
-}
-
-function fmtContext(v) {
-  if (!v) return "—";
-  if (v >= 1_000_000) return `${(v / 1_000_000).toFixed(1)}M`;
-  if (v >= 1_000) return `${(v / 1_000).toFixed(0)}K`;
-  return String(v);
-}
-
 function fmtPct(v) {
   if (v == null || isNaN(v)) return "—";
   return `${(v * 100).toFixed(0)}%`;
-}
-
-function fmtTokens(v) {
-  if (!v) return "—";
-  if (v >= 1e9) return `${(v / 1e9).toFixed(1)}B`;
-  if (v >= 1e6) return `${(v / 1e6).toFixed(0)}M`;
-  return v.toLocaleString();
 }
 
 function escapeHtml(s) {
@@ -169,14 +139,6 @@ function modelIcon(r) {
 
 function providerIcon(p) {
   return p.icon ? iconImg(p.icon, p.provider, "picon") : avatarMarkup(p.provider, "picon");
-}
-
-function cell(html, cls = "", label = "") {
-  const td = document.createElement("td");
-  if (cls) td.className = cls;
-  if (label) td.dataset.label = label;
-  td.innerHTML = html;
-  return td;
 }
 
 /* ── header ───────────────────────────────────────────────────────────── */
@@ -251,13 +213,9 @@ function renderStats(meta) {
   startAgoTimer(meta);
 }
 
-/* ── per-mode chart (simple readable bars) ───────────────────────────── */
+/* ── chart helpers ────────────────────────────────────────────────────── */
 
-function shortName(r) {
-  return (r.name || r.id).split(":").pop().trim().replace(/ \(.*?\)/, "").slice(0, 24);
-}
-
-/* per-page data sources, linked in the chart header */
+/* per-tab data sources, linked in the chart header */
 const SOURCE_LINKS = {
   openrouter: '<a href="https://openrouter.ai/models" target="_blank" rel="noopener">OpenRouter</a>',
   aa: '<a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">Artificial Analysis</a>',
@@ -277,14 +235,7 @@ function valueOf(r) {
   return r.intel / c;
 }
 
-function fmtValue(v) {
-  if (!isFinite(v)) return "free";
-  if (v >= 1000) return (v / 1000).toFixed(1).replace(/\.0$/, "") + "k";
-  if (v >= 100) return v.toFixed(0);
-  return v.toFixed(1);
-}
-
-/* ── podium scoring + hero ─────────────────────────────────────────────
+/* ── scoring ────────────────────────────────────────────────────────────
    Three pillars, each normalized to 0–100 with the best model at 100:
      value = bang-for-buck (Intel per blended $/1M at the best provider;
              free models are unbeatable → 100)
@@ -324,17 +275,9 @@ function computeScores() {
   }
 }
 
-function scoreCell(v, cls) {
-  const html = v == null ? '<span class="score none">—</span>' : `<span class="score ${cls}">${v}</span>`;
-  return cell(html, "num", cls);
-}
+const passesIntel = (r) => state.minIntel === 0 || (r.intel != null && r.intel >= state.minIntel);
 
-function ranksCell(r) {
-  const parts = [];
-  if (r.arena_rank != null) parts.push(`<span class="pbadge arena" title="LMArena rank">Arena #${r.arena_rank}</span>`);
-  if (r._aiRank != null) parts.push(`<span class="pbadge ai" title="AI-test rank by Intelligence Index">AI #${r._aiRank}</span>`);
-  return cell(parts.length ? parts.join(" ") : '<span class="none">—</span>', "num", "Ranks");
-}
+/* ── tiles ────────────────────────────────────────────────────────────── */
 
 function pbar(label, val) {
   if (val == null) {
@@ -343,15 +286,33 @@ function pbar(label, val) {
   return `<div class="pbar"><span class="plabel">${label}</span><span class="ptrack"><i class="pfill" style="width:${Math.min(100, Math.max(0, val))}%"></i></span><span class="pval">${val}</span></div>`;
 }
 
-function renderPodiumHero() {
+function tileFoot(r) {
+  const b = bestProvider(r);
+  const price = b
+    ? `${fmtMoney(provPrice(b)[0])} / ${fmtMoney(provPrice(b)[1])} <em>via ${escapeHtml(b.provider)}</em>`
+    : '<span class="none">—</span>';
+  const ranks = [
+    r.arena_rank != null ? `Arena #${r.arena_rank}` : null,
+    r._aiRank != null ? `AI #${r._aiRank}` : null,
+  ].filter(Boolean).join(" · ");
+  return `<span class="price">${price}</span>${ranks ? `<span class="pranks">${ranks}</span>` : ""}`;
+}
+
+function scoreBars(r) {
+  const s = r._scores || {};
+  return `${pbar("Value", s.value)}${pbar("AI test", s.ai)}${pbar("Arena", s.arena)}`;
+}
+
+function renderHero() {
   const el = document.getElementById("chart");
   if (!el) return;
+  const t = TABS[state.tab];
   const top3 = state.rows
-    .filter((r) => r._scores && r._scores.overall != null)
-    .sort(podiumSort)
+    .filter((r) => passesIntel(r) && t.filter(r))
+    .sort(t.sort)
     .slice(0, 3);
   if (!top3.length) {
-    el.innerHTML = '<p class="empty">No models qualify for the podium yet — models need at least two of: intel, arena, price.</p>';
+    el.innerHTML = '<p class="empty">No models match this view — try lowering Min Intel.</p>';
     return;
   }
   const medals = ["gold", "silver", "bronze"];
@@ -359,15 +320,7 @@ function renderPodiumHero() {
     '<div class="podium">' +
     top3.map((r, i) => {
       const s = r._scores || {};
-      const b = bestProvider(r);
-      const price = b
-        ? `${fmtMoney(provPrice(b)[0])} / ${fmtMoney(provPrice(b)[1])} <em>via ${escapeHtml(b.provider)}</em>`
-        : '<span class="none">—</span>';
-      const open = state.podiumOpen.has(r.id);
-      const foot = [
-        r.arena_rank != null ? `Arena #${r.arena_rank}` : null,
-        r._aiRank != null ? `AI #${r._aiRank}` : null,
-      ].filter(Boolean).join(" · ");
+      const open = state.expanded.has(r.id);
       return `<article class="ptile m${i + 1}${open ? " open" : ""}" data-id="${escapeHtml(r.id)}" title="Click for providers">
       <span class="pmedal ${medals[i]}">#${i + 1}</span>
       <div class="phead">
@@ -376,17 +329,10 @@ function renderPodiumHero() {
           <span class="ptitle">${escapeHtml(r.name || r.id)}</span>
           <span class="pid">${escapeHtml(r.id)}</span>
         </div>
-        <span class="poverall">${s.overall}<span class="psuffix">/100</span></span>
+        <span class="poverall">${s.overall != null ? s.overall : "—"}<span class="psuffix">/100</span></span>
       </div>
-      <div class="pbars">
-        ${pbar("Value", s.value)}
-        ${pbar("AI test", s.ai)}
-        ${pbar("Arena", s.arena)}
-      </div>
-      <div class="pfoot">
-        <span class="price">${price}</span>
-        ${foot ? `<span class="pranks">${foot}</span>` : ""}
-      </div>
+      <div class="pbars">${scoreBars(r)}</div>
+      <div class="pfoot">${tileFoot(r)}</div>
       ${open ? `<div class="p-providers">${providerCards(r)}</div>` : ""}
     </article>`;
     }).join("") +
@@ -395,222 +341,76 @@ function renderPodiumHero() {
   el.querySelectorAll(".ptile").forEach((tile) => {
     tile.addEventListener("click", () => {
       const id = tile.dataset.id;
-      if (state.podiumOpen.has(id)) state.podiumOpen.delete(id);
-      else state.podiumOpen.add(id);
-      renderPodiumHero();
+      if (state.expanded.has(id)) state.expanded.delete(id);
+      else state.expanded.add(id);
+      renderHero();
     });
   });
 }
+
+function modelTile(r, idx) {
+  const s = r._scores || {};
+  const free = r.providers && r.providers.some((p) => p.is_free);
+  const open = state.expanded.has(r.id);
+  return `<article class="mtile${open ? " open" : ""}" data-id="${escapeHtml(r.id)}">
+    <div class="mtop">
+      ${modelIcon(r)}
+      <div class="mname-wrap">
+        <span class="mtname">${escapeHtml(r.name || r.id)}${free ? '<span class="badge free">FREE</span>' : ""}</span>
+        <span class="mtid">${escapeHtml(r.id)}</span>
+      </div>
+      <div class="mright">
+        <span class="moverall">${s.overall != null ? s.overall : "—"}</span>
+        <span class="mtrank">#${idx + 1}</span>
+      </div>
+    </div>
+    <div class="pbars">${scoreBars(r)}</div>
+    <div class="pfoot">${tileFoot(r)}</div>
+    ${open ? `<div class="p-providers">${providerCards(r)}</div>` : ""}
+  </article>`;
+}
+
+function renderGrid() {
+  const grid = document.getElementById("tileGrid");
+  if (!grid) return;
+  const q = state.search.trim().toLowerCase();
+  const t = TABS[state.tab];
+  const rows = state.rows
+    .filter((r) =>
+      (!q || (r.name + " " + r.id + " " + (r.author || "")).toLowerCase().includes(q)) &&
+      passesIntel(r) && t.filter(r))
+    .sort(t.sort)
+    .slice(0, state.topN);
+  grid.innerHTML = '<div class="tile-grid">' + rows.map((r, i) => modelTile(r, i)).join("") + "</div>";
+  const empty = document.getElementById("empty");
+  if (empty) empty.hidden = rows.length > 0;
+  grid.querySelectorAll(".mtile").forEach((tile) => {
+    tile.addEventListener("click", () => {
+      const id = tile.dataset.id;
+      if (state.expanded.has(id)) state.expanded.delete(id);
+      else state.expanded.add(id);
+      renderGrid();
+    });
+  });
+}
+
+/* ── chart (the top-3 hero) ───────────────────────────────────────────── */
 
 function renderChart() {
   const el = document.getElementById("chart");
   if (!el || !state.rows.length) return;
   const title = document.getElementById("chartTitle");
-  const mode = state.mode;
-
-  // show/hide the filter controls that apply to this page
-  const cfIntel = document.getElementById("cfIntel");
-  if (cfIntel) cfIntel.hidden = mode === "arena" || mode === "podium";
-  const cfTopN = document.getElementById("cfTopN");
-  if (cfTopN) cfTopN.hidden = mode === "podium"; // the podium chart is the fixed top-3 hero
-
-  if (mode === "podium") {
-    title.textContent = "Top 3 — best overall right now";
-    setChartSource(`${SOURCE_LINKS.openrouter} prices · ${SOURCE_LINKS.aa} intel · ${SOURCE_LINKS.lmarena} arena`);
-    renderPodiumHero();
-    return;
-  }
-
-  const N = state.topN;
-
-  // min-intel filter: 0 = off (all models), else requires intel data
-  const passesIntel = (r) => state.minIntel === 0 || (r.intel != null && r.intel >= state.minIntel);
-
-  let rows, max, barW, barVal;
-  if (mode === "ai") {
-    title.textContent = `Intelligence Index — top ${N}`;
-    setChartSource(SOURCE_LINKS.aa);
-    rows = state.rows.filter((r) => r.intel != null && passesIntel(r))
-      .sort((a, b) => b.intel - a.intel).slice(0, N);
-    max = 100;
-    barW = (r) => (r.intel / max) * 100;
-    barVal = (r) => `${fmtNum(r.intel)}<span class="hsub"> idx</span>`;
-  } else if (mode === "arena") {
-    title.textContent = `Arena rank — top ${N}`;
-    setChartSource(SOURCE_LINKS.lmarena);
-    rows = state.rows.filter((r) => r.arena_rank != null)
-      .sort((a, b) => a.arena_rank - b.arena_rank).slice(0, N);
-    max = Math.max(...rows.map((r) => r.arena_rank), N);
-    barW = (r) => (1 - (r.arena_rank - 1) / max) * 100;
-    barVal = (r) => `#${r.arena_rank}`;
-  } else {
-    // browse: best value (Intel per blended $/1M at the best provider)
-    title.textContent = "Best value — Intel per $/1M (best provider)";
-    setChartSource(`${SOURCE_LINKS.openrouter} prices · ${SOURCE_LINKS.aa} intel`);
-    rows = state.rows.filter((r) => r.intel != null && passesIntel(r))
-      .sort((a, b) => valueOf(b) - valueOf(a)).slice(0, N);
-    const maxV = Math.max(...rows.map(valueOf).filter(isFinite));
-    max = maxV > 0 ? maxV : 1;
-    barW = (r) => {
-      const v = valueOf(r);
-      if (!isFinite(v)) return 100; // free
-      return (Math.log10(v) / Math.log10(max)) * 100;
-    };
-    barVal = (r) => `<span class="hval-free${valueOf(r) === Infinity ? " free" : ""}">${fmtValue(valueOf(r))}</span>`;
-  }
-
-  if (!rows.length) {
-    el.innerHTML = '<p class="empty">No models match the filter.</p>';
-    return;
-  }
-
-  const filtered = state.minIntel > 0;
-  el.innerHTML = '<div class="hbars">' + rows.map((r) => {
-    const w = barW(r);
-    return `<div class="hrow">
-      <span class="hname" title="${escapeHtml(r.id)}">${escapeHtml(shortName(r))}</span>
-      <span class="htrack"><i class="hfill${filtered ? " filtered" : ""}" style="width:${Math.max(2, Math.min(100, w)).toFixed(1)}%"></i></span>
-      <span class="hval${mode === "arena" ? " arena" : ""}">${barVal(r)}</span>
-    </div>`;
-  }).join("") + "</div>";
+  const t = TABS[state.tab];
+  title.textContent = `${t.label} — top 3`;
+  if (state.tab === "ai") setChartSource(SOURCE_LINKS.aa);
+  else if (state.tab === "arena") setChartSource(SOURCE_LINKS.lmarena);
+  else if (state.tab === "price") setChartSource(`${SOURCE_LINKS.openrouter} prices`);
+  else setChartSource(`${SOURCE_LINKS.openrouter} prices · ${SOURCE_LINKS.aa} intel · ${SOURCE_LINKS.lmarena} arena`);
+  renderHero();
 }
 
-/* ── table ────────────────────────────────────────────────────────────── */
+/* ── provider expansion (cards with reliability) ──────────────────────── */
 
-function headerCols() {
-  if (state.mode === "ai") return [
-    { key: "intel", label: "Intel", sortable: false },
-    { key: "coding", label: "Coding", sortable: false },
-    { key: "agentic", label: "Agentic", sortable: false },
-    { key: "arena", label: "Arena", sortable: false },
-  ];
-  if (state.mode === "arena") return [
-    { key: "arena", label: "Arena", sortable: false },
-    { key: "ai", label: "AI #", sortable: false },
-    { key: "best", label: "Best $/1M", sortable: false },
-    { key: "providers", label: "Providers", sortable: false },
-  ];
-  if (state.mode === "podium") return [
-    { key: "overall", label: "Overall", sortable: false },
-    { key: "value", label: "Value", sortable: false },
-    { key: "ai", label: "AI", sortable: false },
-    { key: "arena", label: "Arena", sortable: false },
-    { key: "best", label: "Best $/1M", sortable: false },
-  ];
-  return COLS;
-}
-
-function renderHeader() {
-  const thead = document.getElementById("thead");
-  thead.innerHTML = "";
-  const tr = document.createElement("tr");
-  const ranked = state.mode !== "browse";
-  if (ranked) {
-    const th = document.createElement("th");
-    th.className = "col-rank";
-    th.textContent = "#";
-    tr.appendChild(th);
-  }
-  for (const c of headerCols()) {
-    const th = document.createElement("th");
-    const sorted = c.key === state.sortKey;
-    const arrow = c.sortable ? `<span class="arrow">${sorted ? (state.sortDir === -1 ? "▼" : "▲") : "▼"}</span>` : "";
-    th.innerHTML = `${escapeHtml(c.label)}${arrow}`;
-    if (c.sortable) {
-      th.classList.add("sortable");
-      if (sorted) th.classList.add("sorted");
-      th.onclick = () => {
-        if (state.sortKey === c.key) state.sortDir *= -1;
-        else {
-          state.sortKey = c.key;
-          state.sortDir = -1;
-        }
-        render();
-      };
-    } else if (c.key === (MODES[state.mode] && MODES[state.mode].metricKey)) {
-      // frozen direction indicator for ranked modes
-      th.classList.add("sorted");
-      const m = MODES[state.mode];
-      th.innerHTML = `${escapeHtml(c.label)}<span class="arrow">${m && m.dir === 1 ? "▲" : "▼"}</span>`;
-    }
-    tr.appendChild(th);
-  }
-  thead.appendChild(tr);
-}
-
-function rankCell(i) {
-  const cls = i === 1 ? " r1" : i === 2 ? " r2" : i === 3 ? " r3" : "";
-  return cell(`<span class="rank${cls}">${i}</span>`, "num col-rank", "Rank");
-}
-
-function modeCells(r) {
-  const m = state.mode;
-  if (m === "ai") {
-    return [
-      cell(`<span class="score${r.intel == null ? " none" : ""}">${r.intel == null ? "—" : fmtNum(r.intel)}</span>`, "num", "Intel"),
-      cell(`<span class="score sub${r.coding == null ? " none" : ""}">${r.coding == null ? "—" : fmtNum(r.coding)}</span>`, "num", "Coding"),
-      cell(`<span class="score sub${r.agentic == null ? " none" : ""}">${r.agentic == null ? "—" : fmtNum(r.agentic)}</span>`, "num", "Agentic"),
-      cell(r.arena_rank != null ? `<span class="arena-rank">#${r.arena_rank}</span>` : '<span class="none">—</span>', "num", "Arena"),
-    ];
-  }
-  if (m === "arena") {
-    return [
-      arenaCell(r),
-      cell(r._aiRank != null ? `<span class="score">#${r._aiRank}</span>` : '<span class="none">—</span>', "num", "AI #"),
-      bestCell(r),
-      countCell(r),
-    ];
-  }
-  if (m === "podium") {
-    const s = r._scores || {};
-    return [
-      scoreCell(s.overall, "overall"),
-      scoreCell(s.value, "value"),
-      scoreCell(s.ai, "ai"),
-      scoreCell(s.arena, "arena"),
-      bestCell(r),
-    ];
-  }
-  return [
-    cell(`<span class="author">${escapeHtml(r.author || "—")}</span>`, "", "Author"),
-    cell(fmtContext(r.context), "num", "Context"),
-    bestCell(r),
-    countCell(r),
-    ranksCell(r),
-  ];
-}
-
-function bestCell(r) {
-  const b = bestProvider(r);
-  let bestHtml = '<span class="none">—</span>';
-  if (b) {
-    const [inP, outP] = provPrice(b);
-    bestHtml = `<span class="best-price">${fmtMoney(inP)} / ${fmtMoney(outP)}</span><div class="best-line">via <em>${escapeHtml(b.provider)}</em></div>`;
-  }
-  if (r.default_provider) {
-    bestHtml += `<div class="best-line def">default: <em class="def">${escapeHtml(r.default_provider)}</em></div>`;
-  }
-  return cell(bestHtml, "num", "Best $/1M");
-}
-
-function countCell(r) {
-  const provCount = r.provider_count
-    ? `<span class="count ${providerCountClass(r.provider_count)}">${r.provider_count}</span>`
-    : '<span class="count">—</span>';
-  return cell(provCount, "num", "Providers");
-}
-
-function arenaCell(r) {
-  const rank = r.arena_rank;
-  let sub = "";
-  const cats = r.arena || {};
-  const bestCat = Object.entries(cats)
-    .filter(([k]) => k !== "overall")
-    .sort((a, b) => a[1] - b[1])[0];
-  if (bestCat) sub = `<div class="best-line">best cat: <em>${escapeHtml(bestCat[0])} #${bestCat[1]}</em></div>`;
-  return cell(`<span class="arena-rank">#${rank}</span>${sub}`, "num", "Arena");
-}/* Provider expansion — one tile per provider: price up top, then raw
-   OpenRouter-reported uptime over the 24h and 30m windows. Cheapest first. */
 function providerCards(r) {
   const provs = [...r.providers].sort((a, b) => providerCost(a) - providerCost(b));
   const cards = provs.map((p) => {
@@ -668,212 +468,37 @@ function providerCards(r) {
     </div>`;
 }
 
-function providerCountClass(n) {
-  if (n >= 10) return "many";
-  if (n >= 3) return "mid";
-  return "few";
-}
-
-function renderBody() {
-  const q = state.search.trim().toLowerCase();
-  let rows = state.rows.filter((r) => {
-    if (!q) return true;
-    return (r.name + " " + r.id + " " + (r.author || "")).toLowerCase().includes(q);
-  });
-
-  const ranked = state.mode !== "browse";
-  const mode = MODES[state.mode];
-  if (ranked && mode) {
-    rows = rows.filter(mode.filter).sort(mode.sort);
-  } else {
-    const col = COLS.find((c) => c.key === state.sortKey);
-    if (col) {
-      rows = [...rows].sort((a, b) => {
-        let va = col.sortVal ? col.sortVal(a) : a[col.key];
-        let vb = col.sortVal ? col.sortVal(b) : b[col.key];
-        if (va == null) va = -Infinity;
-        if (vb == null) vb = -Infinity;
-        if (va < vb) return -state.sortDir;
-        if (va > vb) return state.sortDir;
-        return 0;
-      });
-    }
-  }
-
-  const tbody = document.getElementById("tbody");
-  tbody.innerHTML = "";
-  const empty = document.getElementById("empty");
-  empty.hidden = rows.length > 0;
-
-  rows.forEach((r, idx) => {
-    const tr = document.createElement("tr");
-    tr.className = "main";
-    tr.dataset.id = r.id;
-    const expanded = state.expanded.has(r.id);
-    if (expanded) tr.classList.add("expanded");
-    const hasProviders = r.providers && r.providers.length;
-    const free = r.providers.some((p) => p.is_free);
-
-    const model = cell(
-      `<div class="col-flex"><span class="micon-wrap">${modelIcon(r)}</span>`
-      + `<span class="model-info">`
-      + `<span class="model-line">${hasProviders ? '<span class="chevron">▶</span>' : ""}<span class="mname">${escapeHtml(r.name || r.id)}</span>${free ? '<span class="badge free">FREE</span>' : ""}</span>`
-      + `<span class="mid">${escapeHtml(r.id)}</span>`
-      + `</span></div>`,
-      "col-model"
-    );
-    if (hasProviders) {
-      tr.onclick = () => {
-        if (state.expanded.has(r.id)) state.expanded.delete(r.id);
-        else state.expanded.add(r.id);
-        renderBody();
-      };
-    }
-
-    const cells = [];
-    if (ranked) cells.push(rankCell(idx + 1));
-    cells.push(model);
-    cells.push(...modeCells(r));
-    tr.append(...cells);
-    tbody.appendChild(tr);
-
-    if (expanded && hasProviders) {
-      const dtr = document.createElement("tr");
-      dtr.className = "providers-row";
-      const td = document.createElement("td");
-      td.colSpan = COLS.length + 1;
-      td.innerHTML = providerCards(r);
-      dtr.appendChild(td);
-      tbody.appendChild(dtr);
-    }
-  });
-  updatePins();
-}
-
-/* ── pinned model row ────────────────────────────────────────────────── */
-
-/* The table wrapper's overflow:auto makes position:sticky stick to it
-   (which never scrolls) instead of the window, so the expanded model row
-   is re-rendered as a fixed bar below the top bar while the user browses
-   its provider list. Released when they scroll back to it or past the
-   whole section. */
-function updatePins() {
-  const topbar = document.querySelector(".topbar");
-  const pinTop = topbar ? topbar.getBoundingClientRect().height + 4 : 12;
-  const table = document.querySelector("table");
-  const bar = document.getElementById("pinbar");
-  if (!table) {
-    if (bar) bar.remove();
-    return;
-  }
-  const tRect = table.getBoundingClientRect();
-
-  // the first expanded row whose section straddles (or has crossed) the pin line
-  let pinTarget = null;
-  document.querySelectorAll("tr.main.expanded").forEach((row) => {
-    if (pinTarget) return;
-    const rowRect = row.getBoundingClientRect();
-    const next = row.nextElementSibling; // the tr.providers-row with the cards
-    const sectionBottom = next ? next.getBoundingClientRect().bottom : rowRect.bottom;
-    if (rowRect.top < pinTop && sectionBottom > pinTop) pinTarget = row;
-  });
-
-  if (!pinTarget) {
-    if (bar) bar.remove();
-    return;
-  }
-
-  if (bar && bar.dataset.row === pinTarget.dataset.id) {
-    // already pinned for this row — just keep its position fresh
-    bar.style.left = tRect.left + "px";
-    bar.style.width = tRect.width + "px";
-    return;
-  }
-  if (bar) bar.remove();
-
-  const cells = [...pinTarget.querySelectorAll("td")];
-  const nb = document.createElement("div");
-  nb.id = "pinbar";
-  nb.className = "pinbar";
-  nb.dataset.row = pinTarget.dataset.id;
-  nb.style.top = pinTop + "px";
-  nb.style.left = tRect.left + "px";
-  nb.style.width = tRect.width + "px";
-
-  if (window.innerWidth <= 720) {
-    // compact: model identity + provider count
-    const modelCell = cells[0].cloneNode(true);
-    modelCell.style.flex = "1 1 auto";
-    modelCell.style.maxWidth = "none";
-    const countCell = cells[cells.length - 1].cloneNode(true);
-    countCell.style.flex = "0 0 auto";
-    nb.append(modelCell, countCell);
-  } else {
-    // clone each cell so the bar matches the table's column widths
-    const widths = cells.map((td) => td.offsetWidth);
-    const total = widths.reduce((a, b) => a + b, 0) || 1;
-    cells.forEach((td, i) => {
-      const c = td.cloneNode(true);
-      c.style.flex = `0 0 ${(widths[i] / total) * 100}%`;
-      nb.appendChild(c);
-    });
-  }
-  // the bar is the row — clicking it collapses the model again
-  nb.title = "Click to collapse";
-  nb.addEventListener("click", () => {
-    state.expanded.delete(nb.dataset.row);
-    renderBody();
-    const tr = document.querySelector(`tr.main[data-id="${CSS.escape(nb.dataset.row)}"]`);
-    if (tr) tr.scrollIntoView({ block: "center" });
-  });
-  document.body.appendChild(nb);
-}
+/* ── init ─────────────────────────────────────────────────────────────── */
 
 function render() {
-  renderHeader();
-  renderBody();
+  renderChart();
+  renderGrid();
 }
-
-window.addEventListener("resize", () => { if (state.rows.length) renderChart(); });
-
-/* ── init ─────────────────────────────────────────────────────────────── */
 
 async function init() {
   const search = document.getElementById("search");
   search.addEventListener("input", () => {
     state.search = search.value;
-    renderBody();
+    renderGrid();
   });
 
-  const switchEl = document.getElementById("modeSwitch");
-  switchEl.addEventListener("click", (ev) => {
+  const tabs = document.getElementById("chartTabs");
+  tabs.addEventListener("click", (ev) => {
     const btn = ev.target.closest(".mode-btn");
     if (!btn) return;
-    state.mode = btn.dataset.mode;
+    state.tab = btn.dataset.tab;
     state.expanded.clear();
-    state.podiumOpen.clear();
-    if (!state.topNUserSet && !state.topNSet[state.mode]) {
-      // first visit to this page (and user hasn't set it): apply its default
-      state.topN = TOPN_DEFAULTS[state.mode];
-      state.topNSet[state.mode] = true;
-      const t = document.getElementById("topN");
-      const tv = document.getElementById("topNVal");
-      if (t) t.value = state.topN;
-      if (tv) tv.textContent = state.topN;
-    }
-    switchEl.querySelectorAll(".mode-btn").forEach((b) => b.classList.toggle("active", b === btn));
+    tabs.querySelectorAll(".mode-btn").forEach((b) => b.classList.toggle("active", b === btn));
     render();
-    renderChart(); // each page gets its own graph
   });
 
-  // chart filters — min intel slider, arena top-N slider, cheapest/value toggle
   const minIntel = document.getElementById("minIntel");
   if (minIntel) {
     const val = document.getElementById("minIntelVal");
     minIntel.addEventListener("input", () => {
       state.minIntel = +minIntel.value;
       if (val) val.textContent = state.minIntel;
-      renderChart();
+      render();
     });
   }
   const topN = document.getElementById("topN");
@@ -881,16 +506,10 @@ async function init() {
     const val = document.getElementById("topNVal");
     topN.addEventListener("input", () => {
       state.topN = +topN.value;
-      state.topNUserSet = true; // user-chosen — now it sticks on every page
       if (val) val.textContent = state.topN;
-      renderChart();
+      renderGrid();
     });
   }
-
-  // capture-phase scroll catches window scroll + the table wrapper's own
-  // horizontal scroll; resize keeps the pinned bar's width honest
-  document.addEventListener("scroll", updatePins, { capture: true, passive: true });
-  window.addEventListener("resize", updatePins);
 
   try {
     const resp = await fetch("data/models.json", { cache: "no-store" });
@@ -900,7 +519,6 @@ async function init() {
     computeScores();
     renderStats(data.meta || {});
     render();
-    renderChart();
   } catch (err) {
     const cs = document.getElementById("chartStats");
     if (cs) cs.textContent = "Could not load data/models.json — run scripts/fetch_data.py first";

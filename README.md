@@ -50,48 +50,39 @@ logo.
 ## The interface
 
 The site is a light, paper-toned data desk — quiet greens and ochre,
-serif-display headlines, mono numerals, and nothing decorative:
+serif-display headlines, mono numerals, and nothing decorative. It's a
+**single page**: a top-3 hero plus a tile grid, re-ranked live by the
+selected tab.
 
-- **Top 3** (the landing view) — three **huge hero tiles** for the best
-  overall models: each pillar (bang-for-buck, AI-test, arena) is normalized
-  to 0–100 and blended with equal weights — pillars a model lacks simply
-  drop out of its average, so new models can still compete. Click a tile
-  for its providers. Below, the full ranked table with **Overall / Value /
-  AI / Arena** score columns.
-- **A simple bar chart** at the top, one per page, with filters — and a
-  **source link** in the header pointing at the underlying data (OpenRouter
-  pricing, Artificial Analysis, or the LMArena leaderboard):
-  - **Browse** — **Best value** (Intelligence Index per `$/1M` at the best
-    provider; free models rank first, shown as "free"), plus a **Min Intel**
-    slider (default 50) to exclude low-quality cheap models. Every row also
-    carries **Arena # / AI #** rank badges.
-  - **AI tests** — Intelligence Index, same **Min Intel** slider, plus each
-    model's arena rank. **Arena** — LMArena rank with each model's AI-test
-    rank alongside.
-  - **Show top N** — a bar-count slider on every page (defaults: 12 browse,
-    15 elsewhere; once you set it, your number sticks on all pages).
-- **The table** is the data layer: dense rows, tabular numerals, rank
-  medals, expandable per model. The expanded model row pins below the top
-  bar while you scroll its providers, and clicking the pinned bar collapses
-  it again.
-- **Expanding a model** shows one **tile per provider**, cheapest first:
-  the provider's logo, its `$/1M` price (market vs base tagged), and two
-  raw **uptime** meters — the 24h and 30m windows exactly as OpenRouter
+- **Top 3 hero** — three **huge tiles** for the best models under the
+  active ranking. Clicking a tile expands its providers in place.
+- **Tabs** — **Overall** (default), **AI test**, **Arena**, **Price**.
+  The tab re-ranks the hero *and* the grid below: by the blended score,
+  Intelligence Index, LMArena rank, or cheapest blended `$/1M` (free
+  first).
+- **The blended score** — each pillar (bang-for-buck, AI-test, arena) is
+  normalized to 0–100 and averaged with equal weights; pillars a model
+  lacks simply drop out of its average, so new models can still compete
+  (tie-break: more pillars, then value). Every tile shows the three pillar
+  bars plus the model's **Arena # / AI #** ranks and best price.
+- **The grid** — one **tile per model**: logo, name, score bars, best
+  `$/1M` (market vs base), and ranks. Click a tile for its **provider
+  cards**, cheapest first: each provider's logo, price, and two raw
+  **uptime** meters — the 24h and 30m windows exactly as OpenRouter
   reports them. These are endpoint *availability* numbers, not quality
   scores: ~1/3 of provider rows sit below 99% and some at 0%, but they say
   nothing about output-quality drops or rate limiting.
+- **Filters** — a **Min Intel** slider (default 50) excludes low-quality
+  cheap models, and **Show top N** limits the grid (default 20).
 
-## Comparison modes
+## Ranking sources
 
-The **Compare** switcher has two ranking views (plus the normal browse
-table, which already carries the price column — cheapest blended `$/1M` is
-the browse default sort). Each ranked view shows a `#` medal badge
-(gold/silver/bronze for the top 3):
-
-| Mode | Ranks by | Source | Coverage |
+| Tab | Ranks by | Source | Coverage |
 | --- | --- | --- | --- |
-| **AI tests** | Artificial Analysis **Intelligence Index** (Intel/Coding/Agentic shown) | `GET /api/v1/models` → `benchmarks.artificial_analysis` | ~1/3 of models |
-| **Arena** | LMArena human-preference **overall rank** (plus best category) | `scripts/fetch_arena.js` scrape of lmarena.ai | ~150 models |
+| **Overall** | Equal-weight blend of value / AI-test / arena | All three below | models with ≥2 pillars |
+| **AI test** | Artificial Analysis **Intelligence Index** | `GET /api/v1/models` → `benchmarks.artificial_analysis` | ~1/3 of models |
+| **Arena** | LMArena human-preference **overall rank** | `scripts/fetch_arena.js` scrape of lmarena.ai | ~150 models |
+| **Price** | Cheapest blended `$/1M` at the best provider | `GET /api/v1/models/{id}/endpoints` | all models |
 
 Arena model ids use dashes + variant suffixes (`claude-opus-4-6-high`) where
 OpenRouter uses dots (`anthropic/claude-opus-4.6`), so the fetcher matches on

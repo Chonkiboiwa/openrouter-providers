@@ -25,7 +25,7 @@
   <header class="hero">
     <div class="wrap">
       <h1>Every model.<br />Every provider. <em>Every price.</em></h1>
-      <p class="tagline">Base list prices and real market rates for every provider serving each model on OpenRouter — with the default route and uptime marked. Filter the charts and rank by value (intel per dollar).</p>
+      <p class="tagline">Base list prices and real market rates for every provider serving each model on OpenRouter — with the default route and uptime marked. Rank by overall value, AI tests, arena votes, or price.</p>
       <div class="stats" id="stats"></div>
     </div>
   </header>
@@ -34,6 +34,12 @@
     <section class="chart-panel">
       <div class="chart-head">
         <h2 id="chartTitle"></h2>
+        <div class="mode-switch chart-tabs" id="chartTabs">
+          <button class="mode-btn active" data-tab="overall">Overall</button>
+          <button class="mode-btn" data-tab="ai">AI test</button>
+          <button class="mode-btn" data-tab="arena">Arena</button>
+          <button class="mode-btn" data-tab="price">Price</button>
+        </div>
         <div class="chart-meta">
           <span class="chart-source" id="chartSource"></span>
           <span class="chart-stats" id="chartStats"></span>
@@ -45,32 +51,23 @@
           <input type="range" id="minIntel" min="0" max="80" step="1" value="50" />
         </div>
         <div class="cf-group" id="cfTopN">
-          <label class="cf-label" for="topN">Show top <b id="topNVal">12</b></label>
-          <input type="range" id="topN" min="5" max="50" step="5" value="12" />
+          <label class="cf-label" for="topN">Show top <b id="topNVal">20</b></label>
+          <input type="range" id="topN" min="5" max="50" step="5" value="20" />
         </div>
       </div>
       <div class="chart-body" id="chart"></div>
     </section>
 
     <section class="controls">
-      <div class="mode-switch" id="modeSwitch">
-        <button class="mode-btn active" data-mode="podium">Top 3</button>
-        <button class="mode-btn" data-mode="browse">Browse</button>
-        <button class="mode-btn" data-mode="ai">AI tests</button>
-        <button class="mode-btn" data-mode="arena">Arena</button>
-      </div>
       <div class="search-box">
         <input id="search" type="search" placeholder="Search models — gpt, claude, llama, glm…" autocomplete="off" spellcheck="false" />
       </div>
-      <span class="hint">Click a row to compare providers</span>
+      <span class="hint">Click a tile for its providers</span>
     </section>
 
-    <section class="table-wrap">
-      <table id="rankings">
-        <thead id="thead"></thead>
-        <tbody id="tbody"></tbody>
-      </table>
-      <p class="empty" id="empty" hidden>No models match.</p>
+    <section class="tile-grid-wrap">
+      <div id="tileGrid"></div>
+      <p class="empty" id="empty" hidden>No models match — try lowering Min Intel or searching.</p>
     </section>
 
     <footer>

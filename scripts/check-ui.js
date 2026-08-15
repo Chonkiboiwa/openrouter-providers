@@ -56,77 +56,71 @@ async function main() {
   };
 
   await page.goto(BASE, { waitUntil: "networkidle" });
-  await page.waitForSelector("tbody tr.main");
-  await snap("1-default.png");
+  await page.waitForSelector(".ptile");
+  await snap("1-default.png"); // hero + tile grid
 
-  await page.click("tbody tr.main");
-  await page.waitForSelector(".providers-row");
+  await page.click(".ptile");
+  await page.waitForSelector(".ptile .p-providers");
   await snap("2-expanded.png");
+  await page.click(".ptile.open"); // collapse
+  await page.waitForTimeout(150);
 
   await page.fill("#search", "claude");
   await page.waitForTimeout(350);
   await snap("3-search.png");
-
   await page.fill("#search", "");
-  await page.click("tbody tr.main"); // collapse
-  await page.waitForTimeout(150);
-  await page.click('.mode-btn[data-mode="browse"]'); // sortable headers live in browse
-  await page.waitForTimeout(250);
-  await page.click("th.sortable:nth-of-type(4)"); // sort by Best $/1M
-  await page.waitForTimeout(250);
-  await snap("4-sorted.png");
+  await page.waitForTimeout(200);
 
-  // narrow desktop — where clipping shows up most
-  await page.setViewportSize({ width: 1100, height: 800 });
-  await page.click("tbody tr.main");
-  await page.waitForTimeout(250);
-  await snap("5-narrow-expanded.png");
-  await page.click("tbody tr.main"); // collapse
-
-  // mobile — table becomes stacked cards
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.waitForTimeout(250);
-  await snap("6-mobile.png");
-
-  await page.click("tbody tr.main:has(.chevron)");
-  await page.waitForSelector(".providers-row");
-  await page.waitForTimeout(250);
-  await snap("7-mobile-expanded.png");
-  await page.click("tbody tr.main:has(.chevron)"); // collapse
-
-  // comparison modes
-  await page.setViewportSize({ width: 1440, height: 900 });
-  await page.waitForTimeout(250);
-  for (const mode of ["ai", "arena"]) {
-    await page.click(`.mode-btn[data-mode="${mode}"]`);
+  // tab toggles re-rank the hero + grid
+  for (const tab of ["ai", "arena", "price"]) {
+    await page.click(`#chartTabs .mode-btn[data-tab="${tab}"]`);
     await page.waitForTimeout(300);
-    await snap(`8-${mode}.png`);
-    // expand the top-ranked row inside the mode
-    await page.click("tbody tr.main:has(.chevron)");
-    await page.waitForSelector(".providers-row");
+    await snap(`4-${tab}.png`);
+    await page.click(".mtile");
+    await page.waitForSelector(".mtile .p-providers");
     await page.waitForTimeout(250);
-    await snap(`9-${mode}-expanded.png`);
-    await page.click("tbody tr.main:has(.chevron)");
+    await snap(`5-${tab}-expanded.png`);
+    await page.click(".mtile.open");
     await page.waitForTimeout(150);
   }
-  await page.click(".mode-btn[data-mode=\"browse\"]");
+  await page.click('#chartTabs .mode-btn[data-tab="overall"]');
   await page.waitForTimeout(250);
+  await snap("6-overall.png");
 
-  // browse chart is best-value by default; min-intel filter still applies
-  await snap("10-browse-value.png");
+  // min-intel filter still applies
+  await page.evaluate(() => {
+    const s = document.getElementById("minIntel");
+    s.value = "0";
+    s.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await page.waitForTimeout(250);
+  await snap("7-minintel-0.png");
   await page.evaluate(() => {
     const s = document.getElementById("minIntel");
     s.value = "50";
     s.dispatchEvent(new Event("input", { bubbles: true }));
   });
   await page.waitForTimeout(250);
-  await snap("11-browse-value-filtered.png");
-  await page.evaluate(() => {
-    const s = document.getElementById("minIntel");
-    s.value = "0";
-    s.dispatchEvent(new Event("input", { bubbles: true }));
-  });
-  await page.waitForTimeout(200);
+
+  // narrow desktop — where clipping shows up most
+  await page.setViewportSize({ width: 1100, height: 800 });
+  await page.waitForTimeout(250);
+  await snap("8-narrow.png");
+  await page.click(".mtile");
+  await page.waitForSelector(".mtile .p-providers");
+  await page.waitForTimeout(250);
+  await snap("9-narrow-expanded.png");
+  await page.click(".mtile.open"); // collapse before resizing
+  await page.waitForTimeout(150);
+
+  // mobile — tiles stack to one column
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.waitForTimeout(250);
+  await snap("10-mobile.png");
+  await page.click(".mtile");
+  await page.waitForSelector(".mtile .p-providers");
+  await page.waitForTimeout(250);
+  await snap("11-mobile-expanded.png");
 
   await browser.close();
 
