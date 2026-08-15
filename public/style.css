@@ -884,4 +884,142 @@ footer b { color: var(--ochre); font-weight: 600; }
   .providers-grid { grid-template-columns: 1fr; }
   .pcard { padding: 14px 16px; }
   .pname { max-width: none; }
+
+/* ── podium — top-3 hero tiles ─────────────────────────────── */
+
+.podium {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 6px 0 2px;
+}
+.ptile {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px 22px 18px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s, border-color 0.15s;
+}
+.ptile:hover { transform: translateY(-2px); border-color: var(--border-strong); }
+.ptile.m1 { border-color: #e4cf93; background: linear-gradient(180deg, #fbf7ea, var(--surface) 62%); }
+.ptile.m2 { border-color: #d8dad4; background: linear-gradient(180deg, #f5f5f3, var(--surface) 62%); }
+.ptile.m3 { border-color: #dfc3a3; background: linear-gradient(180deg, #faf1e6, var(--surface) 62%); }
+.ptile.open { cursor: default; }
+
+.pmedal {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.pmedal.gold { background: #f5e8bd; color: #7a5a10; border: 1px solid #e4cf93; }
+.pmedal.silver { background: #ecece9; color: #5b615b; border: 1px solid #d8dad4; }
+.pmedal.bronze { background: #f0e2d4; color: #7c4e22; border: 1px solid #dfc3a3; }
+
+.phead { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.ptile .logo-tile, .ptile .avatar.micon { width: 54px; height: 54px; border-radius: 15px; }
+.ptile .logo-tile img { padding: 9px; }
+.pname { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.ptitle {
+  font-family: var(--display);
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pid {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--faint);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.poverall {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--green-ink);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+}
+.psuffix { font-size: 12px; color: var(--faint); font-weight: 400; }
+
+.pbars { display: flex; flex-direction: column; gap: 7px; margin-top: 18px; }
+.pbar { display: grid; grid-template-columns: 56px 1fr 32px; align-items: center; gap: 10px; }
+.plabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  white-space: nowrap;
+}
+.ptrack { height: 7px; border-radius: 999px; background: #edeeda; overflow: hidden; }
+.pfill { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #6db392, var(--green)); }
+.pfill.none { background: transparent; }
+.pval {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.pval.none { color: var(--faint); }
+
+.pfoot {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--muted);
+}
+.pfoot .price { font-family: var(--mono); font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+.pfoot em { font-style: normal; color: var(--faint); }
+.pfoot .pranks { font-family: var(--mono); font-size: 11.5px; color: var(--faint); font-variant-numeric: tabular-nums; }
+
+.ptile .p-providers {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+/* rank badges — compact Arena # / AI # chips used in browse rows */
+.pbadge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 6px;
+  margin-right: 5px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.pbadge.arena { background: var(--ochre-dim); color: var(--ochre); border: 1px solid #eadfc8; }
+.pbadge.ai { background: var(--green-dim); color: var(--green-ink); border: 1px solid #cfe5d8; }
+
+@media (max-width: 860px) {
+  .podium { grid-template-columns: 1fr; }
+  .ptitle { font-size: 20px; }
+  .poverall { font-size: 28px; }
+}
 }

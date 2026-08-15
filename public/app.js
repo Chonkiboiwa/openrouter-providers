@@ -7,6 +7,7 @@ const COLS = [
   { key: "context", label: "Context", sortable: true },
   { key: "best", label: "Best $/1M", sortable: true, sortVal: (r) => bestCost(r) },
   { key: "providers", label: "Providers", sortable: true, sortVal: (r) => r.provider_count },
+  { key: "ranks", label: "Ranks", sortable: false },
 ];
 
 const IO_RATIO = 3.0;
@@ -27,7 +28,24 @@ const MODES = {
     sort: (a, b) => a.arena_rank - b.arena_rank,
     metricKey: "arena",
   },
+  podium: {
+    note: "Equal-weight blend of value, AI-test, and arena scores",
+    dir: -1,
+    filter: (r) => r._scores && r._scores.overall != null,
+    sort: podiumSort,
+    metricKey: "overall",
+  },
 };
+
+/* Podium ranking: overall desc, then more pillars wins (a model ranked on
+   all three beats a tie on two), then value, then intel. */
+function podiumSort(a, b) {
+  const sa = a._scores || {}, sb = b._scores || {};
+  if (sb.overall !== sa.overall) return sb.overall - sa.overall;
+  if ((sb.pillars || 0) !== (sa.pillars || 0)) return (sb.pillars || 0) - (sa.pillars || 0);
+  if ((sb.value || 0) !== (sa.value || 0)) return (sb.value || 0) - (sa.value || 0);
+  return (sb.ai || 0) - (sa.ai || 0);
+}
 
 let state = {
   rows: [],
@@ -35,14 +53,15 @@ let state = {
   sortKey: "providers",
   sortDir: -1,
   expanded: new Set(),
-  mode: "browse", // browse | ai | arena
+  podiumOpen: new Set(),
+  mode: "podium", // podium | browse | ai | arena
   minIntel: 50, // default filter: only models with Intel Index >= 50
   topN: 12, // how many bars the chart shows (per-page default, user-tunable)
   topNSet: {}, // pages whose per-page default has been applied
   topNUserSet: false, // true once the user touches the control — then it sticks
 };
 
-const TOPN_DEFAULTS = { browse: 12, ai: 15, arena: 15 };
+const TOPN_DEFAULTS = { podium: 10, browse: 12, ai: 15, arena: 15 };
 
 /* ── data helpers ─────────────────────────────────────────────────────── */
 
@@ -265,6 +284,124 @@ function fmtValue(v) {
   return v.toFixed(1);
 }
 
+/* ── podium scoring + hero ─────────────────────────────────────────────
+   Three pillars, each normalized to 0–100 with the best model at 100:
+     value = bang-for-buck (Intel per blended $/1M at the best provider;
+             free models are unbeatable → 100)
+     ai    = Intelligence Index percentile
+     arena = LMArena rank percentile (#1 → 100)
+   Overall = equal-weight mean of the pillars a model actually has
+   (missing pillars drop out of the average). Only models with ≥2
+   pillars get an overall score, so the podium is never decided by
+   price alone. */
+function computeScores() {
+  const rows = state.rows;
+  const byIntel = rows.filter((r) => r.intel != null).sort((a, b) => b.intel - a.intel);
+  const byArena = rows.filter((r) => r.arena_rank != null).sort((a, b) => a.arena_rank - b.arena_rank);
+  const byValue = rows.filter((r) => r.intel != null && isFinite(bestCost(r))).sort((a, b) => valueOf(b) - valueOf(a));
+  const pct = (arr, r) => {
+    const i = arr.indexOf(r);
+    if (i < 0 || arr.length < 2) return null;
+    return (100 * (arr.length - 1 - i)) / (arr.length - 1);
+  };
+  const intelPct = new Map(byIntel.map((r) => [r.id, pct(byIntel, r)]));
+  const arenaPct = new Map(byArena.map((r) => [r.id, pct(byArena, r)]));
+  const valuePct = new Map(byValue.map((r) => [r.id, pct(byValue, r)]));
+  for (const r of rows) {
+    const free = r.providers && r.providers.some((p) => p.is_free);
+    const value = free ? 100 : valuePct.get(r.id);
+    const ai = intelPct.get(r.id);
+    const arena = arenaPct.get(r.id);
+    const pillars = [value, ai, arena].filter((v) => v != null);
+    r._aiRank = ai != null ? byIntel.indexOf(r) + 1 : null;
+    r._scores = {
+      pillars: pillars.length,
+      value: value != null ? Math.round(value) : null,
+      ai: ai != null ? Math.round(ai) : null,
+      arena: arena != null ? Math.round(arena) : null,
+      overall: pillars.length >= 2 ? Math.round(pillars.reduce((a, b) => a + b, 0) / pillars.length) : null,
+    };
+  }
+}
+
+function scoreCell(v, cls) {
+  const html = v == null ? '<span class="score none">—</span>' : `<span class="score ${cls}">${v}</span>`;
+  return cell(html, "num", cls);
+}
+
+function ranksCell(r) {
+  const parts = [];
+  if (r.arena_rank != null) parts.push(`<span class="pbadge arena" title="LMArena rank">Arena #${r.arena_rank}</span>`);
+  if (r._aiRank != null) parts.push(`<span class="pbadge ai" title="AI-test rank by Intelligence Index">AI #${r._aiRank}</span>`);
+  return cell(parts.length ? parts.join(" ") : '<span class="none">—</span>', "num", "Ranks");
+}
+
+function pbar(label, val) {
+  if (val == null) {
+    return `<div class="pbar"><span class="plabel">${label}</span><span class="ptrack"><i class="pfill none"></i></span><span class="pval none">—</span></div>`;
+  }
+  return `<div class="pbar"><span class="plabel">${label}</span><span class="ptrack"><i class="pfill" style="width:${Math.min(100, Math.max(0, val))}%"></i></span><span class="pval">${val}</span></div>`;
+}
+
+function renderPodiumHero() {
+  const el = document.getElementById("chart");
+  if (!el) return;
+  const top3 = state.rows
+    .filter((r) => r._scores && r._scores.overall != null)
+    .sort(podiumSort)
+    .slice(0, 3);
+  if (!top3.length) {
+    el.innerHTML = '<p class="empty">No models qualify for the podium yet — models need at least two of: intel, arena, price.</p>';
+    return;
+  }
+  const medals = ["gold", "silver", "bronze"];
+  el.innerHTML =
+    '<div class="podium">' +
+    top3.map((r, i) => {
+      const s = r._scores || {};
+      const b = bestProvider(r);
+      const price = b
+        ? `${fmtMoney(provPrice(b)[0])} / ${fmtMoney(provPrice(b)[1])} <em>via ${escapeHtml(b.provider)}</em>`
+        : '<span class="none">—</span>';
+      const open = state.podiumOpen.has(r.id);
+      const foot = [
+        r.arena_rank != null ? `Arena #${r.arena_rank}` : null,
+        r._aiRank != null ? `AI #${r._aiRank}` : null,
+      ].filter(Boolean).join(" · ");
+      return `<article class="ptile m${i + 1}${open ? " open" : ""}" data-id="${escapeHtml(r.id)}" title="Click for providers">
+      <span class="pmedal ${medals[i]}">#${i + 1}</span>
+      <div class="phead">
+        ${modelIcon(r)}
+        <div class="pname">
+          <span class="ptitle">${escapeHtml(r.name || r.id)}</span>
+          <span class="pid">${escapeHtml(r.id)}</span>
+        </div>
+        <span class="poverall">${s.overall}<span class="psuffix">/100</span></span>
+      </div>
+      <div class="pbars">
+        ${pbar("Value", s.value)}
+        ${pbar("AI test", s.ai)}
+        ${pbar("Arena", s.arena)}
+      </div>
+      <div class="pfoot">
+        <span class="price">${price}</span>
+        ${foot ? `<span class="pranks">${foot}</span>` : ""}
+      </div>
+      ${open ? `<div class="p-providers">${providerCards(r)}</div>` : ""}
+    </article>`;
+    }).join("") +
+    "</div>";
+
+  el.querySelectorAll(".ptile").forEach((tile) => {
+    tile.addEventListener("click", () => {
+      const id = tile.dataset.id;
+      if (state.podiumOpen.has(id)) state.podiumOpen.delete(id);
+      else state.podiumOpen.add(id);
+      renderPodiumHero();
+    });
+  });
+}
+
 function renderChart() {
   const el = document.getElementById("chart");
   if (!el || !state.rows.length) return;
@@ -273,7 +410,16 @@ function renderChart() {
 
   // show/hide the filter controls that apply to this page
   const cfIntel = document.getElementById("cfIntel");
-  if (cfIntel) cfIntel.hidden = mode === "arena"; // "Show top N" is on every page
+  if (cfIntel) cfIntel.hidden = mode === "arena" || mode === "podium";
+  const cfTopN = document.getElementById("cfTopN");
+  if (cfTopN) cfTopN.hidden = mode === "podium"; // the podium chart is the fixed top-3 hero
+
+  if (mode === "podium") {
+    title.textContent = "Top 3 — best overall right now";
+    setChartSource(`${SOURCE_LINKS.openrouter} prices · ${SOURCE_LINKS.aa} intel · ${SOURCE_LINKS.lmarena} arena`);
+    renderPodiumHero();
+    return;
+  }
 
   const N = state.topN;
 
@@ -336,11 +482,20 @@ function headerCols() {
     { key: "intel", label: "Intel", sortable: false },
     { key: "coding", label: "Coding", sortable: false },
     { key: "agentic", label: "Agentic", sortable: false },
+    { key: "arena", label: "Arena", sortable: false },
   ];
   if (state.mode === "arena") return [
     { key: "arena", label: "Arena", sortable: false },
+    { key: "ai", label: "AI #", sortable: false },
     { key: "best", label: "Best $/1M", sortable: false },
     { key: "providers", label: "Providers", sortable: false },
+  ];
+  if (state.mode === "podium") return [
+    { key: "overall", label: "Overall", sortable: false },
+    { key: "value", label: "Value", sortable: false },
+    { key: "ai", label: "AI", sortable: false },
+    { key: "arena", label: "Arena", sortable: false },
+    { key: "best", label: "Best $/1M", sortable: false },
   ];
   return COLS;
 }
@@ -395,14 +550,33 @@ function modeCells(r) {
       cell(`<span class="score${r.intel == null ? " none" : ""}">${r.intel == null ? "—" : fmtNum(r.intel)}</span>`, "num", "Intel"),
       cell(`<span class="score sub${r.coding == null ? " none" : ""}">${r.coding == null ? "—" : fmtNum(r.coding)}</span>`, "num", "Coding"),
       cell(`<span class="score sub${r.agentic == null ? " none" : ""}">${r.agentic == null ? "—" : fmtNum(r.agentic)}</span>`, "num", "Agentic"),
+      cell(r.arena_rank != null ? `<span class="arena-rank">#${r.arena_rank}</span>` : '<span class="none">—</span>', "num", "Arena"),
     ];
   }
-  if (m === "arena") return [arenaCell(r), bestCell(r), countCell(r)];
+  if (m === "arena") {
+    return [
+      arenaCell(r),
+      cell(r._aiRank != null ? `<span class="score">#${r._aiRank}</span>` : '<span class="none">—</span>', "num", "AI #"),
+      bestCell(r),
+      countCell(r),
+    ];
+  }
+  if (m === "podium") {
+    const s = r._scores || {};
+    return [
+      scoreCell(s.overall, "overall"),
+      scoreCell(s.value, "value"),
+      scoreCell(s.ai, "ai"),
+      scoreCell(s.arena, "arena"),
+      bestCell(r),
+    ];
+  }
   return [
     cell(`<span class="author">${escapeHtml(r.author || "—")}</span>`, "", "Author"),
     cell(fmtContext(r.context), "num", "Context"),
     bestCell(r),
     countCell(r),
+    ranksCell(r),
   ];
 }
 
@@ -677,6 +851,7 @@ async function init() {
     if (!btn) return;
     state.mode = btn.dataset.mode;
     state.expanded.clear();
+    state.podiumOpen.clear();
     if (!state.topNUserSet && !state.topNSet[state.mode]) {
       // first visit to this page (and user hasn't set it): apply its default
       state.topN = TOPN_DEFAULTS[state.mode];
@@ -722,6 +897,7 @@ async function init() {
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     const data = await resp.json();
     state.rows = data.models;
+    computeScores();
     renderStats(data.meta || {});
     render();
     renderChart();

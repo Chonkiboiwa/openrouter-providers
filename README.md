@@ -52,13 +52,22 @@ logo.
 The site is a light, paper-toned data desk — quiet greens and ochre,
 serif-display headlines, mono numerals, and nothing decorative:
 
+- **Top 3** (the landing view) — three **huge hero tiles** for the best
+  overall models: each pillar (bang-for-buck, AI-test, arena) is normalized
+  to 0–100 and blended with equal weights — pillars a model lacks simply
+  drop out of its average, so new models can still compete. Click a tile
+  for its providers. Below, the full ranked table with **Overall / Value /
+  AI / Arena** score columns.
 - **A simple bar chart** at the top, one per page, with filters — and a
   **source link** in the header pointing at the underlying data (OpenRouter
   pricing, Artificial Analysis, or the LMArena leaderboard):
   - **Browse** — **Best value** (Intelligence Index per `$/1M` at the best
     provider; free models rank first, shown as "free"), plus a **Min Intel**
-    slider to exclude low-quality cheap models.
-  - **AI tests** — Intelligence Index, same **Min Intel** slider.
+    slider (default 50) to exclude low-quality cheap models. Every row also
+    carries **Arena # / AI #** rank badges.
+  - **AI tests** — Intelligence Index, same **Min Intel** slider, plus each
+    model's arena rank. **Arena** — LMArena rank with each model's AI-test
+    rank alongside.
   - **Show top N** — a bar-count slider on every page (defaults: 12 browse,
     15 elsewhere; once you set it, your number sticks on all pages).
 - **The table** is the data layer: dense rows, tabular numerals, rank

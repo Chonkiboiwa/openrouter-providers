@@ -70,6 +70,8 @@ async function main() {
   await page.fill("#search", "");
   await page.click("tbody tr.main"); // collapse
   await page.waitForTimeout(150);
+  await page.click('.mode-btn[data-mode="browse"]'); // sortable headers live in browse
+  await page.waitForTimeout(250);
   await page.click("th.sortable:nth-of-type(4)"); // sort by Best $/1M
   await page.waitForTimeout(250);
   await snap("4-sorted.png");
