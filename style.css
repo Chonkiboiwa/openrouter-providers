@@ -654,7 +654,7 @@ tbody tr.main:hover .count { transform: scale(1.1); }
 .pcard .logo-tile, .pcard .avatar.picon { width: 26px; height: 26px; border-radius: 7px; font-size: 11px; }
 .pcard .logo-tile img { padding: 4px; }
 
-.pname {
+.pcard .pname {
   font-weight: 600;
   font-size: 13.5px;
   overflow: hidden;
@@ -1015,13 +1015,11 @@ footer b { color: var(--ochre); font-weight: 600; }
   font-family: var(--display);
   font-size: 18px;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.25;
   letter-spacing: -0.01em;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  overflow-wrap: anywhere; /* long model names wrap instead of being cut */
 }
+.ptile .pname { padding-right: 42px; } /* keep the name clear of the # medal */
 .pid {
   font-family: var(--mono);
   font-size: 11px;
@@ -1101,10 +1099,16 @@ footer b { color: var(--ochre); font-weight: 600; }
 .pbadge.arena { background: var(--ochre-dim); color: var(--ochre); border: 1px solid #eadfc8; }
 .pbadge.ai { background: var(--green-dim); color: var(--green-ink); border: 1px solid #cfe5d8; }
 
-@media (max-width: 860px) {
-  .podium { grid-template-columns: 1fr; }
+@media (max-width: 1000px) {
+  .podium { grid-template-columns: repeat(2, 1fr); }
   .ptile { min-width: 0; }
+  .ptile:last-child { grid-column: 1 / -1; } /* #3 spans the full row below the top two */
+  .ptitle { font-size: 16px; }
+}
+@media (max-width: 700px) {
+  .podium { grid-template-columns: 1fr; }
+  .ptile:last-child { grid-column: auto; }
+  .ptitle { font-size: 16px; }
   .chart-source { white-space: normal; }
-  .ptitle { font-size: 17px; }
   .poverall { font-size: 19px; }
 }
