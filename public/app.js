@@ -36,7 +36,7 @@ let state = {
   sortDir: -1,
   expanded: new Set(),
   mode: "browse", // browse | ai | arena
-  minIntel: 0, // 0 = no filter; else only models with Intel Index >= this
+  minIntel: 50, // default filter: only models with Intel Index >= 50
   topN: 12, // how many bars the chart shows (per-page default, user-tunable)
   topNSet: {}, // pages whose per-page default has been applied
   topNUserSet: false, // true once the user touches the control — then it sticks

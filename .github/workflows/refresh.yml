@@ -1,11 +1,11 @@
 name: Refresh data + deploy
 
-# Hourly: OpenRouter pricing / providers / AI benchmarks (fetch_data.py).
+# Every 15 min: OpenRouter pricing / providers / AI benchmarks (fetch_data.py).
 # Daily 03:30 UTC: also scrape fresh LMArena ranks (fetch_arena.js).
 # Manual (workflow_dispatch) runs both, same as the daily run.
 on:
   schedule:
-    - cron: "0 * * * *"     # hourly, top of every hour
+    - cron: "*/15 * * * *"  # every 15 minutes
     - cron: "30 3 * * *"    # daily 03:30 UTC — + arena ranks
   workflow_dispatch: {}     # manual "Run workflow" button runs everything
 
@@ -33,7 +33,8 @@ jobs:
       - name: Install node deps (playwright-core, used by the arena scrape)
         run: npm ci
 
-      - name: Install Chromium for the arena scrape
+      - name: Install Chromium for the arena scrape (daily / manual only)
+        if: github.event.schedule == '30 3 * * *' || github.event_name == 'workflow_dispatch'
         run: npx --yes playwright@1.62.1 install --with-deps chromium
 
       - name: Fetch OpenRouter pricing + providers + AI benchmarks
@@ -44,7 +45,7 @@ jobs:
         continue-on-error: true   # never block the deploy on the enrichment scrape
         run: node scripts/fetch_arena.js
 
-      - name: Commit refreshed arena ranks (persists for hourly builds)
+      - name: Commit refreshed arena ranks (persists for 15-min builds)
         if: github.event.schedule == '30 3 * * *' || github.event_name == 'workflow_dispatch'
         run: |
           git config user.name "data-bot"

@@ -122,18 +122,19 @@ Live at **<https://chonkiboiwa.github.io/openrouter-providers/>** (repo:
 <https://github.com/Chonkiboiwa/openrouter-providers>). The workflow in
 `.github/workflows/refresh.yml` runs on GitHub's free tier:
 
-- **Hourly** (`0 * * * *`): `fetch_data.py` — OpenRouter pricing, providers,
-  uptime, and the AI benchmarks (they ride in OpenRouter's models API).
+- **Every 15 minutes** (`*/15 * * * *`): `fetch_data.py` — OpenRouter pricing,
+  providers, uptime, and the AI benchmarks (they ride in OpenRouter's models
+  API).
 - **Daily 03:30 UTC** (`30 3 * * *`): additionally `fetch_arena.js` — fresh
-  LMArena ranks via headless Chromium, committed back to the repo so hourly
-  builds keep the ranks.
+  LMArena ranks via headless Chromium, committed back to the repo so the
+  15-min builds keep the ranks.
 - Each run uploads `public/` and deploys it to **GitHub Pages**.
 - `workflow_dispatch` runs both jobs on demand from the Actions tab.
 
 Run it locally the same way the workflow does:
 
 ```bash
-python scripts/fetch_data.py          # hourly job
+python scripts/fetch_data.py          # 15-min job
 node scripts/fetch_arena.js           # daily job (needs Chrome / playwright chromium)
 ```
 
