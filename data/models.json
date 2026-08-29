@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated_at": "2026-08-29T03:32:40Z",
+  "generated_at": "2026-08-29T03:34:37Z",
   "source": {
    "models": "https://openrouter.ai/api/v1/models",
    "endpoints": "https://openrouter.ai/api/v1/models/{id}/endpoints",
@@ -19,7 +19,7 @@
    "models_with_effective": 368,
    "models_with_arena": 155,
    "effective_enabled": true,
-   "fetch_seconds": 14.2
+   "fetch_seconds": 5.3
   }
  },
  "models": [
@@ -2666,7 +2666,7 @@
      "total_tokens": 495998586,
      "context": 131072,
      "quantization": "fp4",
-     "uptime_1d": 99.84240324870893,
+     "uptime_1d": 99.84206528753634,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -2684,8 +2684,8 @@
      "total_tokens": 647774415,
      "context": 131072,
      "quantization": "bf16",
-     "uptime_1d": 99.5893680793001,
-     "uptime_30m": 99.95735425817732,
+     "uptime_1d": 99.5883518106039,
+     "uptime_30m": 99.93470986697135,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -2703,8 +2703,8 @@
      "total_tokens": 506483660,
      "context": 131072,
      "quantization": "bf16",
-     "uptime_1d": 99.68842876441857,
-     "uptime_30m": 100,
+     "uptime_1d": 99.68772179590746,
+     "uptime_30m": 99.99208108964206,
      "latency_30m": null,
      "is_free": false
     },
@@ -2721,7 +2721,7 @@
      "total_tokens": 506483660,
      "context": 131072,
      "quantization": "bf16",
-     "uptime_1d": 99.88262254764966,
+     "uptime_1d": 99.88236612144298,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -2757,8 +2757,8 @@
      "total_tokens": null,
      "context": 131072,
      "quantization": "fp4",
-     "uptime_1d": 89.65550617232277,
-     "uptime_30m": 92.87321830457614,
+     "uptime_1d": 89.61287577992059,
+     "uptime_30m": 91.92645883293366,
      "latency_30m": null,
      "is_free": false
     },
@@ -2775,8 +2775,8 @@
      "total_tokens": 193478290,
      "context": 128000,
      "quantization": "unknown",
-     "uptime_1d": 99.9779991199648,
-     "uptime_30m": 99.98678122934567,
+     "uptime_1d": 99.97800073330889,
+     "uptime_30m": 99.98689040377556,
      "latency_30m": null,
      "is_free": false
     },
@@ -2793,8 +2793,8 @@
      "total_tokens": 22925245,
      "context": 131072,
      "quantization": "fp8",
-     "uptime_1d": 90.99006765510292,
-     "uptime_30m": 83.35483870967741,
+     "uptime_1d": 90.96376840901081,
+     "uptime_30m": 79.66101694915254,
      "latency_30m": null,
      "is_free": false
     },
@@ -2829,8 +2829,8 @@
      "total_tokens": null,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 86.02202478677565,
-     "uptime_30m": 77.70551508844953,
+     "uptime_1d": 86.00618223377607,
+     "uptime_30m": 77.21256761422488,
      "latency_30m": null,
      "is_free": false
     },
@@ -2857,7 +2857,7 @@
      "tag": "mancer/fp8",
      "model_id": "openai/gpt-oss-120b",
      "icon": "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://mancer.tech/&size=256",
-     "in": 0.075,
+     "in": 0.085,
      "out": 0.5,
      "eff_in": null,
      "eff_out": null,
@@ -2865,7 +2865,7 @@
      "total_tokens": null,
      "context": 131072,
      "quantization": "fp8",
-     "uptime_1d": 99.52761466174896,
+     "uptime_1d": 99.52589274812456,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -2883,7 +2883,7 @@
      "total_tokens": 67857086,
      "context": 128072,
      "quantization": "fp4",
-     "uptime_1d": 99.99808248387369,
+     "uptime_1d": 99.99807899923545,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -2901,7 +2901,7 @@
      "total_tokens": 1239112248,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 99.99667323653813,
+     "uptime_1d": 99.99670093509513,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -2919,7 +2919,7 @@
      "total_tokens": 32955102,
      "context": 131072,
      "quantization": "fp4",
-     "uptime_1d": 99.98205410592611,
+     "uptime_1d": 99.98197247671602,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -2955,7 +2955,7 @@
      "total_tokens": 4650615,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 99.81638596935545,
+     "uptime_1d": 99.81580869509988,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -2991,8 +2991,8 @@
      "total_tokens": 388728695,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 99.95832812434887,
-     "uptime_30m": 99.97789078045545,
+     "uptime_1d": 99.95818071343703,
+     "uptime_30m": 99.9662731871838,
      "latency_30m": null,
      "is_free": false
     },
@@ -3009,8 +3009,8 @@
      "total_tokens": 14317869,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 93.89676988813984,
-     "uptime_30m": 97.05882352941177,
+     "uptime_1d": 93.90271988581993,
+     "uptime_30m": 98.21428571428571,
      "latency_30m": null,
      "is_free": false
     },
@@ -3027,7 +3027,7 @@
      "total_tokens": null,
      "context": 131072,
      "quantization": "fp4",
-     "uptime_1d": 99.1653920730312,
+     "uptime_1d": 99.1638163454187,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -3045,8 +3045,8 @@
      "total_tokens": 7239925,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 93.73089638824777,
-     "uptime_30m": 98.47715736040608,
+     "uptime_1d": 93.7137043124364,
+     "uptime_30m": 98.0392156862745,
      "latency_30m": null,
      "is_free": false
     },
@@ -3063,7 +3063,7 @@
      "total_tokens": 37936189,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 99.77660587416685,
+     "uptime_1d": 99.77665086135877,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -3081,7 +3081,7 @@
      "total_tokens": 404526943,
      "context": 131072,
      "quantization": "fp16",
-     "uptime_1d": 99.99129276165252,
+     "uptime_1d": 99.9912896309133,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -3991,8 +3991,8 @@
      "total_tokens": 20044515741,
      "context": 1024000,
      "quantization": "fp8",
-     "uptime_1d": 99.87274605426104,
-     "uptime_30m": 99.88590528531714,
+     "uptime_1d": 99.87255310373646,
+     "uptime_30m": 99.88570303984497,
      "latency_30m": null,
      "is_free": false
     },
@@ -4027,8 +4027,8 @@
      "total_tokens": 14194112976,
      "context": 1048576,
      "quantization": "fp8",
-     "uptime_1d": 99.3748635063682,
-     "uptime_30m": 99.70261523659582,
+     "uptime_1d": 99.375694248917,
+     "uptime_30m": 99.71666201701771,
      "latency_30m": null,
      "is_free": false
     },
@@ -4045,8 +4045,8 @@
      "total_tokens": 1893439520,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 99.86598391589784,
-     "uptime_30m": 99.8945109308501,
+     "uptime_1d": 99.86572412597852,
+     "uptime_30m": 99.8824077022955,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -4064,8 +4064,8 @@
      "total_tokens": 3717839023,
      "context": 1048575,
      "quantization": "fp8",
-     "uptime_1d": 97.6618699940792,
-     "uptime_30m": 97.44935170178282,
+     "uptime_1d": 97.66029578744755,
+     "uptime_30m": 97.43408138899568,
      "latency_30m": null,
      "is_free": false
     },
@@ -4100,8 +4100,8 @@
      "total_tokens": null,
      "context": 1048576,
      "quantization": "fp8",
-     "uptime_1d": 97.77298180714659,
-     "uptime_30m": 99.9979347234939,
+     "uptime_1d": 97.78213367640257,
+     "uptime_30m": 99.99691916663458,
      "latency_30m": null,
      "is_free": false
     },
@@ -4136,8 +4136,8 @@
      "total_tokens": 1911607762,
      "context": 1048576,
      "quantization": "fp8",
-     "uptime_1d": 99.04923535010069,
-     "uptime_30m": 99.8870954252739,
+     "uptime_1d": 99.04956639469214,
+     "uptime_30m": 99.88018014295749,
      "latency_30m": null,
      "is_free": false
     },
@@ -4154,8 +4154,8 @@
      "total_tokens": 826268032,
      "context": 1000000,
      "quantization": "unknown",
-     "uptime_1d": 99.55844359322951,
-     "uptime_30m": 99.84524760383387,
+     "uptime_1d": 99.55866757774136,
+     "uptime_30m": 99.84337897236398,
      "latency_30m": null,
      "is_free": false
     },
@@ -4172,8 +4172,8 @@
      "total_tokens": 698080786,
      "context": 1048576,
      "quantization": "fp8",
-     "uptime_1d": 98.64963694863165,
-     "uptime_30m": 97.97170459228057,
+     "uptime_1d": 98.65149436279842,
+     "uptime_30m": 98.20874134224982,
      "latency_30m": null,
      "is_free": false
     },
@@ -4190,8 +4190,8 @@
      "total_tokens": 2595751320,
      "context": 1048576,
      "quantization": "fp4",
-     "uptime_1d": 99.79811116859774,
-     "uptime_30m": 99.99698163323826,
+     "uptime_1d": 99.7981277775229,
+     "uptime_30m": 99.99696030153808,
      "latency_30m": null,
      "is_free": false
     },
@@ -4208,8 +4208,8 @@
      "total_tokens": 1912296005,
      "context": 1048576,
      "quantization": "fp8",
-     "uptime_1d": 99.81800424021534,
-     "uptime_30m": 99.98777306814478,
+     "uptime_1d": 99.81887134590298,
+     "uptime_30m": 99.99387242386487,
      "latency_30m": null,
      "is_free": false
     },
@@ -4226,8 +4226,8 @@
      "total_tokens": 781915977,
      "context": 1048576,
      "quantization": "fp8",
-     "uptime_1d": 99.72641508126469,
-     "uptime_30m": 99.98814088627111,
+     "uptime_1d": 99.72745752746917,
+     "uptime_30m": 99.98790907625342,
      "latency_30m": null,
      "is_free": false
     },
@@ -4244,8 +4244,8 @@
      "total_tokens": null,
      "context": 1000000,
      "quantization": "fp8",
-     "uptime_1d": 99.84058590455948,
-     "uptime_30m": 99.98211890925346,
+     "uptime_1d": 99.8409861709906,
+     "uptime_30m": 99.98207296304042,
      "latency_30m": null,
      "is_free": false
     },
@@ -4262,8 +4262,8 @@
      "total_tokens": null,
      "context": 1048576,
      "quantization": "fp8",
-     "uptime_1d": 99.63044163143338,
-     "uptime_30m": 99.9913079380256,
+     "uptime_1d": 99.63048436394514,
+     "uptime_30m": 99.99133242323778,
      "latency_30m": null,
      "is_free": false
     },
@@ -4280,8 +4280,8 @@
      "total_tokens": 538424420,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 99.11837422229468,
-     "uptime_30m": 99.98852947923835,
+     "uptime_1d": 99.11721698915224,
+     "uptime_30m": 99.9882394449018,
      "latency_30m": null,
      "is_free": false
     },
@@ -4316,8 +4316,8 @@
      "total_tokens": null,
      "context": 1048576,
      "quantization": "fp8",
-     "uptime_1d": 99.40911874095342,
-     "uptime_30m": 99.87830512224804,
+     "uptime_1d": 99.40566049978156,
+     "uptime_30m": 99.42333785617367,
      "latency_30m": null,
      "is_free": false
     },
@@ -4334,8 +4334,8 @@
      "total_tokens": 49455238,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 87.8720403770504,
-     "uptime_30m": 91.13924050632912,
+     "uptime_1d": 87.84441973735014,
+     "uptime_30m": 94.30604982206405,
      "latency_30m": null,
      "is_free": false
     },
@@ -4352,8 +4352,8 @@
      "total_tokens": 861481459,
      "context": 384000,
      "quantization": "unknown",
-     "uptime_1d": 99.98836788761507,
-     "uptime_30m": 99.99220090469505,
+     "uptime_1d": 99.98849523722888,
+     "uptime_30m": 99.99608211879016,
      "latency_30m": null,
      "is_free": false
     }
@@ -4794,8 +4794,8 @@
      "total_tokens": 327627103,
      "context": 262144,
      "quantization": "bf16",
-     "uptime_1d": 99.67982182355583,
-     "uptime_30m": 99.9620169024784,
+     "uptime_1d": 99.6800524358508,
+     "uptime_30m": 99.97982650796853,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -4831,8 +4831,8 @@
      "total_tokens": 1345641256,
      "context": 262144,
      "quantization": "fp4",
-     "uptime_1d": 98.485233206482,
-     "uptime_30m": 99.35959928732309,
+     "uptime_1d": 98.49044592863847,
+     "uptime_30m": 99.31160746979128,
      "latency_30m": null,
      "is_free": false
     },
@@ -4849,8 +4849,8 @@
      "total_tokens": 72806089,
      "context": 131072,
      "quantization": "fp4",
-     "uptime_1d": 95.78082174685555,
-     "uptime_30m": 98.812351543943,
+     "uptime_1d": 95.76591014837409,
+     "uptime_30m": 98.30188679245283,
      "latency_30m": null,
      "is_free": false
     },
@@ -4867,8 +4867,8 @@
      "total_tokens": 480300169,
      "context": 256000,
      "quantization": "bf16",
-     "uptime_1d": 99.70395605586893,
-     "uptime_30m": 99.53838371063614,
+     "uptime_1d": 99.70231923727368,
+     "uptime_30m": 99.39573155052713,
      "latency_30m": null,
      "is_free": false
     },
@@ -4885,8 +4885,8 @@
      "total_tokens": 519518968,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.66860258976979,
-     "uptime_30m": 99.29787474991507,
+     "uptime_1d": 99.6692835655317,
+     "uptime_30m": 99.47800693557218,
      "latency_30m": null,
      "is_free": false
     },
@@ -4903,8 +4903,8 @@
      "total_tokens": 255952146,
      "context": 262144,
      "quantization": "fp4",
-     "uptime_1d": 99.79773391816332,
-     "uptime_30m": 99.94165694282381,
+     "uptime_1d": 99.79751757112302,
+     "uptime_30m": 99.95565410199556,
      "latency_30m": null,
      "is_free": false
     },
@@ -4921,8 +4921,8 @@
      "total_tokens": 255952146,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 98.79574723194983,
-     "uptime_30m": 99.41761708323223,
+     "uptime_1d": 98.79387892482431,
+     "uptime_30m": 99.54285714285714,
      "latency_30m": null,
      "is_free": false
     },
@@ -4939,7 +4939,7 @@
      "total_tokens": 255952146,
      "context": 131072,
      "quantization": "fp8",
-     "uptime_1d": 69.74658625753835,
+     "uptime_1d": 69.74185886617914,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -4957,8 +4957,8 @@
      "total_tokens": 120514791,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 94.42753563580385,
-     "uptime_30m": 96.5163600846492,
+     "uptime_1d": 94.43640714442115,
+     "uptime_30m": 96.56975849869251,
      "latency_30m": null,
      "is_free": false
     },
@@ -4975,8 +4975,8 @@
      "total_tokens": 262195824,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.45826151194287,
-     "uptime_30m": 99.46911918648124,
+     "uptime_1d": 99.4451652021168,
+     "uptime_30m": 99.2004878379294,
      "latency_30m": null,
      "is_free": false
     },
@@ -5011,8 +5011,8 @@
      "total_tokens": 850011728,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.9718373030567,
-     "uptime_30m": 99.99192376029721,
+     "uptime_1d": 99.97270703153056,
+     "uptime_30m": 99.99253118231384,
      "latency_30m": null,
      "is_free": false
     },
@@ -5029,8 +5029,8 @@
      "total_tokens": null,
      "context": 262144,
      "quantization": "bf16",
-     "uptime_1d": 99.05788903333695,
-     "uptime_30m": 90.81632653061224,
+     "uptime_1d": 99.05472326335226,
+     "uptime_30m": 89.50276243093923,
      "latency_30m": null,
      "is_free": false
     },
@@ -5047,8 +5047,8 @@
      "total_tokens": 51669112,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 74.55832022939597,
-     "uptime_30m": 99.644128113879,
+     "uptime_1d": 74.68970608591334,
+     "uptime_30m": 99.72247918593895,
      "latency_30m": null,
      "is_free": false
     },
@@ -5083,8 +5083,8 @@
      "total_tokens": 27095521,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 97.52273678602687,
-     "uptime_30m": 93.69369369369369,
+     "uptime_1d": 97.51872391515637,
+     "uptime_30m": 94.64285714285714,
      "latency_30m": null,
      "is_free": false
     },
@@ -5101,7 +5101,7 @@
      "total_tokens": 8646737,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 99.88932320260002,
+     "uptime_1d": 99.8900131984162,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -5137,8 +5137,8 @@
      "total_tokens": null,
      "context": 262144,
      "quantization": "fp4",
-     "uptime_1d": 99.67854548067481,
-     "uptime_30m": 99.99540039556598,
+     "uptime_1d": 99.67858685988044,
+     "uptime_30m": 99.99459751485684,
      "latency_30m": null,
      "is_free": false
     },
@@ -5155,7 +5155,7 @@
      "total_tokens": 285040631,
      "context": 131072,
      "quantization": "fp16",
-     "uptime_1d": 99.99542927140301,
+     "uptime_1d": 99.99543258031808,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -5563,7 +5563,7 @@
     "instruction": 9,
     "longer": 9
    },
-   "default_provider": "Makora",
+   "default_provider": "Sail Research",
    "provider_count": 20,
    "providers": [
     {
@@ -5582,7 +5582,8 @@
      "uptime_1d": 99.17254439508224,
      "uptime_30m": 99.800796812749,
      "latency_30m": null,
-     "is_free": false
+     "is_free": false,
+     "is_default": true
     },
     {
      "provider": "Morph",
@@ -5654,8 +5655,7 @@
      "uptime_1d": 92.34271261460638,
      "uptime_30m": 96.46017699115043,
      "latency_30m": null,
-     "is_free": false,
-     "is_default": true
+     "is_free": false
     },
     {
      "provider": "Modal",
@@ -7096,7 +7096,7 @@
     "instruction": 13,
     "longer": 20
    },
-   "default_provider": "Morph",
+   "default_provider": "DeepInfra",
    "provider_count": 18,
    "providers": [
     {
@@ -7115,8 +7115,7 @@
      "uptime_1d": 96.69902912621359,
      "uptime_30m": 96.49484536082474,
      "latency_30m": null,
-     "is_free": false,
-     "is_default": true
+     "is_free": false
     },
     {
      "provider": "BaseTen",
@@ -7152,7 +7151,8 @@
      "uptime_1d": 92.59737962748807,
      "uptime_30m": 99.97782705099777,
      "latency_30m": null,
-     "is_free": false
+     "is_free": false,
+     "is_default": true
     },
     {
      "provider": "AtlasCloud",
@@ -8829,7 +8829,7 @@
    "agentic": 54.3,
    "arena_rank": null,
    "arena": null,
-   "default_provider": "Makora",
+   "default_provider": "Sail Research",
    "provider_count": 17,
    "providers": [
     {
@@ -8848,7 +8848,8 @@
      "uptime_1d": null,
      "uptime_30m": null,
      "latency_30m": null,
-     "is_free": false
+     "is_free": false,
+     "is_default": true
     },
     {
      "provider": "Morph",
@@ -8902,8 +8903,7 @@
      "uptime_1d": null,
      "uptime_30m": null,
      "latency_30m": null,
-     "is_free": false,
-     "is_default": true
+     "is_free": false
     },
     {
      "provider": "Modal",
@@ -9786,7 +9786,7 @@
    "agentic": null,
    "arena_rank": null,
    "arena": null,
-   "default_provider": "DeepInfra",
+   "default_provider": "Novita",
    "provider_count": 16,
    "providers": [
     {
@@ -9802,8 +9802,8 @@
      "total_tokens": 164825925,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 88.98196118534337,
-     "uptime_30m": 88.48288621646624,
+     "uptime_1d": 88.9909171633255,
+     "uptime_30m": 88.39285714285714,
      "latency_30m": null,
      "is_free": false
     },
@@ -9820,11 +9820,10 @@
      "total_tokens": 170787508,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 95.91183854646404,
-     "uptime_30m": 95.90762438444558,
+     "uptime_1d": 95.91333198907485,
+     "uptime_30m": 96.81200187529302,
      "latency_30m": null,
-     "is_free": false,
-     "is_default": true
+     "is_free": false
     },
     {
      "provider": "NovitaAI",
@@ -9857,10 +9856,11 @@
      "total_tokens": null,
      "context": 131072,
      "quantization": "fp8",
-     "uptime_1d": 98.27371566105072,
-     "uptime_30m": 98.07580174927114,
+     "uptime_1d": 98.27696846057333,
+     "uptime_30m": 98.36842105263159,
      "latency_30m": null,
-     "is_free": false
+     "is_free": false,
+     "is_default": true
     },
     {
      "provider": "Alibaba Cloud Int.",
@@ -9893,8 +9893,8 @@
      "total_tokens": null,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 99.99427658655623,
-     "uptime_30m": 99.92464204973625,
+     "uptime_1d": 99.99426739974464,
+     "uptime_30m": 99.93131868131869,
      "latency_30m": null,
      "is_free": false
     },
@@ -9911,8 +9911,8 @@
      "total_tokens": 156054522,
      "context": 131072,
      "quantization": "fp8",
-     "uptime_1d": 99.78918827542088,
-     "uptime_30m": 99.76754997675499,
+     "uptime_1d": 99.78969819206682,
+     "uptime_30m": 99.75661697596593,
      "latency_30m": null,
      "is_free": false
     },
@@ -9929,8 +9929,8 @@
      "total_tokens": 19823142,
      "context": 128000,
      "quantization": "fp8",
-     "uptime_1d": 94.73935758195033,
-     "uptime_30m": 95.52845528455285,
+     "uptime_1d": 94.7481243301179,
+     "uptime_30m": 96.64246823956442,
      "latency_30m": null,
      "is_free": false
     },
@@ -9965,8 +9965,8 @@
      "total_tokens": null,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 93.73160617140819,
-     "uptime_30m": 94.64692482915717,
+     "uptime_1d": 93.70054062524484,
+     "uptime_30m": 94.5859872611465,
      "latency_30m": null,
      "is_free": false
     },
@@ -9983,8 +9983,8 @@
      "total_tokens": 11804252,
      "context": 128000,
      "quantization": "unknown",
-     "uptime_1d": 99.02794093934997,
-     "uptime_30m": 99.812382739212,
+     "uptime_1d": 99.02981979075449,
+     "uptime_30m": 99.66832504145937,
      "latency_30m": null,
      "is_free": false
     },
@@ -10001,8 +10001,8 @@
      "total_tokens": 11241536,
      "context": 131072,
      "quantization": "fp8",
-     "uptime_1d": 99.274875241878,
-     "uptime_30m": 99.81718464351006,
+     "uptime_1d": 99.27446145066949,
+     "uptime_30m": 99.83844911147011,
      "latency_30m": null,
      "is_free": false
     },
@@ -10037,7 +10037,7 @@
      "total_tokens": null,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.9522282126527,
+     "uptime_1d": 99.95215245594609,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -10073,8 +10073,8 @@
      "total_tokens": null,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 98.56747287522603,
-     "uptime_30m": 98.22840010902154,
+     "uptime_1d": 98.56622234127292,
+     "uptime_30m": 98.22936529555979,
      "latency_30m": null,
      "is_free": false
     }
@@ -10136,7 +10136,7 @@
      "total_tokens": 285056223,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.02371536854648,
+     "uptime_1d": 99.02208077950652,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -10154,8 +10154,8 @@
      "total_tokens": 1162170000,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 98.98398547336075,
-     "uptime_30m": 99.21179389870092,
+     "uptime_1d": 98.98155059175248,
+     "uptime_30m": 98.96350986795399,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -10191,7 +10191,7 @@
      "total_tokens": 116283681,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 98.5411845760973,
+     "uptime_1d": 98.5464658655612,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -10209,8 +10209,8 @@
      "total_tokens": 719423892,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.7380418264708,
-     "uptime_30m": 99.82758620689656,
+     "uptime_1d": 99.73874511049206,
+     "uptime_30m": 99.82618771726536,
      "latency_30m": null,
      "is_free": false
     },
@@ -10227,8 +10227,8 @@
      "total_tokens": 809336712,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 92.09302949601197,
-     "uptime_30m": 99.93648777389647,
+     "uptime_1d": 92.09919416473365,
+     "uptime_30m": 99.93688860839382,
      "latency_30m": null,
      "is_free": false
     },
@@ -10245,7 +10245,7 @@
      "total_tokens": null,
      "context": 1000000,
      "quantization": "unknown",
-     "uptime_1d": 99.94156690007551,
+     "uptime_1d": 99.94304530716657,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -10281,8 +10281,8 @@
      "total_tokens": null,
      "context": 1000000,
      "quantization": "unknown",
-     "uptime_1d": 99.79467347101507,
-     "uptime_30m": 99.57627118644068,
+     "uptime_1d": 99.80067372281688,
+     "uptime_30m": 99.5768688293371,
      "latency_30m": null,
      "is_free": false
     },
@@ -10299,8 +10299,8 @@
      "total_tokens": 8648307,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 92.33404411507674,
-     "uptime_30m": 94.61077844311377,
+     "uptime_1d": 92.3133440626968,
+     "uptime_30m": 91.61676646706587,
      "latency_30m": null,
      "is_free": false
     },
@@ -10317,7 +10317,7 @@
      "total_tokens": 52806431,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 98.82819268757581,
+     "uptime_1d": 98.82977570701051,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -10335,8 +10335,8 @@
      "total_tokens": null,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.73089161194231,
-     "uptime_30m": 99.69604863221885,
+     "uptime_1d": 99.73075946151893,
+     "uptime_30m": 99.69879518072288,
      "latency_30m": null,
      "is_free": false
     },
@@ -11518,7 +11518,7 @@
      "total_tokens": 306161703,
      "context": 198000,
      "quantization": "fp8",
-     "uptime_1d": 99.96050196361666,
+     "uptime_1d": 99.96050240935303,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -11536,7 +11536,7 @@
      "total_tokens": 33250408,
      "context": 202752,
      "quantization": "fp4",
-     "uptime_1d": 99.92351231451735,
+     "uptime_1d": 99.92328346758727,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -11554,8 +11554,8 @@
      "total_tokens": 55106077,
      "context": 202752,
      "quantization": "fp8",
-     "uptime_1d": 99.29879347054649,
-     "uptime_30m": 100,
+     "uptime_1d": 99.29509408220113,
+     "uptime_30m": 99.89200863930886,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -11591,7 +11591,7 @@
      "total_tokens": 14279808,
      "context": 204800,
      "quantization": "fp8",
-     "uptime_1d": 99.99601450719382,
+     "uptime_1d": 99.99600638977635,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -11609,7 +11609,7 @@
      "total_tokens": null,
      "context": 202752,
      "quantization": "fp8",
-     "uptime_1d": 99.65322580645162,
+     "uptime_1d": 99.65074723846654,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -11627,7 +11627,7 @@
      "total_tokens": 176897178,
      "context": 202752,
      "quantization": "fp8",
-     "uptime_1d": 99.99579279516172,
+     "uptime_1d": 99.99583636931403,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -11645,7 +11645,7 @@
      "total_tokens": 15029043,
      "context": 202752,
      "quantization": "fp8",
-     "uptime_1d": 99.93187237424776,
+     "uptime_1d": 99.93163951236185,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -11663,7 +11663,7 @@
      "total_tokens": 14032855,
      "context": 198000,
      "quantization": "fp8",
-     "uptime_1d": 84.97948879772798,
+     "uptime_1d": 84.86967577876669,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -11681,7 +11681,7 @@
      "total_tokens": 13451623,
      "context": 64000,
      "quantization": "unknown",
-     "uptime_1d": 95.6897156897157,
+     "uptime_1d": 95.68644008162691,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -11717,7 +11717,7 @@
      "total_tokens": 9027597,
      "context": 202752,
      "quantization": "unknown",
-     "uptime_1d": 93.21057601510859,
+     "uptime_1d": 93.18870784388025,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -11735,7 +11735,7 @@
      "total_tokens": null,
      "context": 202800,
      "quantization": "fp8",
-     "uptime_1d": 99.96557659208261,
+     "uptime_1d": 99.96556473829202,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -13642,8 +13642,8 @@
      "total_tokens": 86043475,
      "context": 262144,
      "quantization": "fp4",
-     "uptime_1d": 99.84987666447157,
-     "uptime_30m": 99.95178399228544,
+     "uptime_1d": 99.84903212819968,
+     "uptime_30m": 99.90937924784775,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -13661,8 +13661,8 @@
      "total_tokens": 438049227,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.62671287563894,
-     "uptime_30m": 100,
+     "uptime_1d": 99.62840222452229,
+     "uptime_30m": 99.98650472334683,
      "latency_30m": null,
      "is_free": false
     },
@@ -13679,8 +13679,8 @@
      "total_tokens": 45489886,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 96.98296545105566,
-     "uptime_30m": 98.65534324133051,
+     "uptime_1d": 96.97676375482335,
+     "uptime_30m": 99.47916666666666,
      "latency_30m": null,
      "is_free": false
     },
@@ -13697,8 +13697,8 @@
      "total_tokens": 194906291,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.56748480933926,
-     "uptime_30m": 99.967277486911,
+     "uptime_1d": 99.56797869588956,
+     "uptime_30m": 99.96672766594577,
      "latency_30m": null,
      "is_free": false
     },
@@ -13715,7 +13715,7 @@
      "total_tokens": 9766525,
      "context": 256000,
      "quantization": "fp8",
-     "uptime_1d": 99.98581013966876,
+     "uptime_1d": 99.98567921440262,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -13751,7 +13751,7 @@
      "total_tokens": 37011815,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.70435810928315,
+     "uptime_1d": 99.70430154285019,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -13769,7 +13769,7 @@
      "total_tokens": null,
      "context": 262140,
      "quantization": "fp8",
-     "uptime_1d": 99.52160493827161,
+     "uptime_1d": 99.52158648095991,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -13787,7 +13787,7 @@
      "total_tokens": 12514288,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.83125210934864,
+     "uptime_1d": 99.83114525729242,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -13805,7 +13805,7 @@
      "total_tokens": 25583307,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.95988575462918,
+     "uptime_1d": 99.95985354573484,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -13823,7 +13823,7 @@
      "total_tokens": 14176270,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 96.6047325445759,
+     "uptime_1d": 96.60020023360588,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -14311,7 +14311,7 @@
      "total_tokens": 232999249,
      "context": 262144,
      "quantization": "int4",
-     "uptime_1d": 99.98286047282242,
+     "uptime_1d": 99.98283772496882,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -14329,8 +14329,8 @@
      "total_tokens": 146669775,
      "context": 262144,
      "quantization": "fp4",
-     "uptime_1d": 99.88810001543447,
-     "uptime_30m": 99.95217599234816,
+     "uptime_1d": 99.88809893597522,
+     "uptime_30m": 99.95421245421245,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -14348,8 +14348,8 @@
      "total_tokens": 83104813,
      "context": 256000,
      "quantization": "fp8",
-     "uptime_1d": 98.99496103753064,
-     "uptime_30m": 99.54128440366972,
+     "uptime_1d": 98.99149912043987,
+     "uptime_30m": 99.73214285714286,
      "latency_30m": null,
      "is_free": false
     },
@@ -14384,7 +14384,7 @@
      "total_tokens": 202268663,
      "context": 262144,
      "quantization": "int4",
-     "uptime_1d": 99.99301477107255,
+     "uptime_1d": 99.99300883575603,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -14402,8 +14402,8 @@
      "total_tokens": 10569074,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.69825553983969,
-     "uptime_30m": 97.77777777777777,
+     "uptime_1d": 99.69488939740656,
+     "uptime_30m": 98.30508474576271,
      "latency_30m": null,
      "is_free": false
     },
@@ -14438,7 +14438,7 @@
      "total_tokens": 71197300,
      "context": 256000,
      "quantization": "unknown",
-     "uptime_1d": 99.39573787631846,
+     "uptime_1d": 99.39297050578068,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -14456,7 +14456,7 @@
      "total_tokens": null,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 98.8280185336604,
+     "uptime_1d": 98.82857726622625,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -14474,7 +14474,7 @@
      "total_tokens": 857233,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 88.46153846153845,
+     "uptime_1d": 88.48484848484848,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -14492,7 +14492,7 @@
      "total_tokens": 1472950,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.76263140047473,
+     "uptime_1d": 99.76255088195387,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -14763,8 +14763,8 @@
      "total_tokens": 732316648,
      "context": 200000,
      "quantization": "unknown",
-     "uptime_1d": 99.93246025267811,
-     "uptime_30m": 99.54924498535046,
+     "uptime_1d": 99.93255720015003,
+     "uptime_30m": 99.58115183246073,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -14782,8 +14782,8 @@
      "total_tokens": 2724449578,
      "context": 200000,
      "quantization": "unknown",
-     "uptime_1d": 99.95549003037652,
-     "uptime_30m": 99.89555010279196,
+     "uptime_1d": 99.95560610597087,
+     "uptime_30m": 99.9057693476807,
      "latency_30m": null,
      "is_free": false
     },
@@ -14854,7 +14854,7 @@
      "total_tokens": 3099652,
      "context": 200000,
      "quantization": "unknown",
-     "uptime_1d": 99.99329983249581,
+     "uptime_1d": 99.99326069864091,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -14872,7 +14872,7 @@
      "total_tokens": null,
      "context": 200000,
      "quantization": "unknown",
-     "uptime_1d": 99.88639428538735,
+     "uptime_1d": 99.88647129929106,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -14944,7 +14944,7 @@
      "total_tokens": null,
      "context": 200000,
      "quantization": "unknown",
-     "uptime_1d": 99.94909387090206,
+     "uptime_1d": 99.94910423452768,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -16218,7 +16218,7 @@
      "total_tokens": 336611027,
      "context": 163840,
      "quantization": "fp4",
-     "uptime_1d": 99.96261535724945,
+     "uptime_1d": 99.9626156953782,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -16255,7 +16255,7 @@
      "total_tokens": 29172092,
      "context": 131072,
      "quantization": "fp8",
-     "uptime_1d": 99.82445874780574,
+     "uptime_1d": 99.82439252822728,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -16273,8 +16273,8 @@
      "total_tokens": 43343857,
      "context": 163840,
      "quantization": "fp8",
-     "uptime_1d": 98.28633544344268,
-     "uptime_30m": 98.78706199460916,
+     "uptime_1d": 98.28646692497539,
+     "uptime_30m": 99.10485933503837,
      "latency_30m": null,
      "is_free": false
     },
@@ -16291,7 +16291,7 @@
      "total_tokens": null,
      "context": 131072,
      "quantization": "fp8",
-     "uptime_1d": 99.89522526567879,
+     "uptime_1d": 99.89492923174727,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -16309,7 +16309,7 @@
      "total_tokens": 292844219,
      "context": 161000,
      "quantization": "fp8",
-     "uptime_1d": 99.97380480960416,
+     "uptime_1d": 99.97378362285232,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -16327,8 +16327,8 @@
      "total_tokens": 6453069,
      "context": 131072,
      "quantization": "fp8",
-     "uptime_1d": 98.40922933610405,
-     "uptime_30m": 97.42647058823529,
+     "uptime_1d": 98.41258491240616,
+     "uptime_30m": 97.91044776119404,
      "latency_30m": null,
      "is_free": false
     },
@@ -16345,8 +16345,8 @@
      "total_tokens": 10077333,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 97.27158634538152,
-     "uptime_30m": 97.05215419501134,
+     "uptime_1d": 97.25217130877508,
+     "uptime_30m": 96.40610961365678,
      "latency_30m": null,
      "is_free": false
     },
@@ -16381,7 +16381,7 @@
      "total_tokens": null,
      "context": 163840,
      "quantization": "unknown",
-     "uptime_1d": 96.9452579409777,
+     "uptime_1d": 96.94167531237314,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -18272,8 +18272,8 @@
      "total_tokens": 94535451,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 92.77393102090376,
-     "uptime_30m": 99.08045977011494,
+     "uptime_1d": 92.77458068958732,
+     "uptime_30m": 98.33729216152018,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -18291,8 +18291,8 @@
      "total_tokens": 39030625,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 89.79674140990483,
-     "uptime_30m": 98.99425287356321,
+     "uptime_1d": 89.86316783539955,
+     "uptime_30m": 99.08256880733946,
      "latency_30m": null,
      "is_free": false
     },
@@ -18327,7 +18327,7 @@
      "total_tokens": null,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.94669324515593,
+     "uptime_1d": 99.94701658725921,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -18345,8 +18345,8 @@
      "total_tokens": 31090511,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 93.2802272890743,
-     "uptime_30m": 95.74468085106383,
+     "uptime_1d": 93.307412607553,
+     "uptime_30m": 94.34628975265018,
      "latency_30m": null,
      "is_free": false
     },
@@ -18363,8 +18363,8 @@
      "total_tokens": 434675955,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.33217272182425,
-     "uptime_30m": 99.96631862579993,
+     "uptime_1d": 99.34610228472003,
+     "uptime_30m": 99.96759559300065,
      "latency_30m": null,
      "is_free": false
     },
@@ -18381,8 +18381,8 @@
      "total_tokens": 177951648,
      "context": 256000,
      "quantization": "fp8",
-     "uptime_1d": 97.78705950565852,
-     "uptime_30m": 99.96618194115658,
+     "uptime_1d": 97.80455844127945,
+     "uptime_30m": 99.85380116959064,
      "latency_30m": null,
      "is_free": false
     },
@@ -18399,8 +18399,8 @@
      "total_tokens": 706324973,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.77424519517407,
-     "uptime_30m": 99.94553376906318,
+     "uptime_1d": 99.77426636568849,
+     "uptime_30m": 99.94252873563218,
      "latency_30m": null,
      "is_free": false
     }
@@ -18634,8 +18634,8 @@
      "total_tokens": null,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 95.9129853251063,
-     "uptime_30m": 99.85422740524781,
+     "uptime_1d": 95.90713411016146,
+     "uptime_30m": 99.65059399021663,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -18653,8 +18653,8 @@
      "total_tokens": 16302697,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.04735219949565,
-     "uptime_30m": 99.74811083123426,
+     "uptime_1d": 99.04588550626076,
+     "uptime_30m": 99.51807228915662,
      "latency_30m": null,
      "is_free": false
     },
@@ -18671,7 +18671,7 @@
      "total_tokens": 7440748,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.95291743736338,
+     "uptime_1d": 99.95293484838298,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -18689,7 +18689,7 @@
      "total_tokens": 16040630,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 95.87064886786077,
+     "uptime_1d": 95.87363263927018,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -18725,7 +18725,7 @@
      "total_tokens": null,
      "context": 262144,
      "quantization": "bf16",
-     "uptime_1d": 99.92536727158458,
+     "uptime_1d": 99.92551940415524,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -18743,7 +18743,7 @@
      "total_tokens": 10928136,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.87675333059451,
+     "uptime_1d": 99.87634147418628,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -19286,8 +19286,8 @@
      "total_tokens": null,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 99.55141954380868,
-     "uptime_30m": 99.37266417512014,
+     "uptime_1d": 99.55300877241932,
+     "uptime_30m": 99.49373834265921,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -19305,8 +19305,8 @@
      "total_tokens": null,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 96.26510550372551,
-     "uptime_30m": 95.50561797752809,
+     "uptime_1d": 96.26720901126407,
+     "uptime_30m": 95.52631578947368,
      "latency_30m": null,
      "is_free": false
     },
@@ -19323,8 +19323,8 @@
      "total_tokens": null,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 99.55141954380868,
-     "uptime_30m": 99.37266417512014,
+     "uptime_1d": 99.55300877241932,
+     "uptime_30m": 99.49373834265921,
      "latency_30m": null,
      "is_free": false
     },
@@ -19341,7 +19341,7 @@
      "total_tokens": null,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 60.91151031270792,
+     "uptime_1d": 60.968280467445744,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -19359,7 +19359,7 @@
      "total_tokens": null,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 59.54897815362932,
+     "uptime_1d": 59.589525831564046,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -19377,8 +19377,8 @@
      "total_tokens": null,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 96.26510550372551,
-     "uptime_30m": 95.50561797752809,
+     "uptime_1d": 96.26720901126407,
+     "uptime_30m": 95.52631578947368,
      "latency_30m": null,
      "is_free": false
     },
@@ -19395,8 +19395,8 @@
      "total_tokens": null,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 99.55141954380868,
-     "uptime_30m": 99.37266417512014,
+     "uptime_1d": 99.55300877241932,
+     "uptime_30m": 99.49373834265921,
      "latency_30m": null,
      "is_free": false
     },
@@ -19413,8 +19413,8 @@
      "total_tokens": null,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 96.26510550372551,
-     "uptime_30m": 95.50561797752809,
+     "uptime_1d": 96.26720901126407,
+     "uptime_30m": 95.52631578947368,
      "latency_30m": null,
      "is_free": false
     }
@@ -20074,8 +20074,8 @@
      "total_tokens": 3476224888,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 91.46450573215257,
-     "uptime_30m": 99.69477496120021,
+     "uptime_1d": 91.4624179124336,
+     "uptime_30m": 99.78766659137112,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -20093,7 +20093,7 @@
      "total_tokens": 3476224888,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 99.99898146780674,
+     "uptime_1d": 99.99898123952586,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -20111,8 +20111,8 @@
      "total_tokens": 3476224888,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 79.68072910695861,
-     "uptime_30m": 98.65853658536585,
+     "uptime_1d": 80.45079400776656,
+     "uptime_30m": 99.02491874322861,
      "latency_30m": null,
      "is_free": false
     },
@@ -20129,8 +20129,8 @@
      "total_tokens": 110582798820,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 98.20862342674363,
-     "uptime_30m": 98.78963265944003,
+     "uptime_1d": 98.21943145155687,
+     "uptime_30m": 98.5916286557553,
      "latency_30m": null,
      "is_free": false
     },
@@ -20147,8 +20147,8 @@
      "total_tokens": 110582798820,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 98.20862342674363,
-     "uptime_30m": 98.78963265944003,
+     "uptime_1d": 98.21943145155687,
+     "uptime_30m": 98.5916286557553,
      "latency_30m": null,
      "is_free": false
     },
@@ -20165,8 +20165,8 @@
      "total_tokens": 110582798820,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 98.20862342674363,
-     "uptime_30m": 98.78963265944003,
+     "uptime_1d": 98.21943145155687,
+     "uptime_30m": 98.5916286557553,
      "latency_30m": null,
      "is_free": false
     },
@@ -20183,7 +20183,7 @@
      "total_tokens": 512051990,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 99.99489544162937,
+     "uptime_1d": 99.99495054337764,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -20998,7 +20998,7 @@
      "total_tokens": 982351718,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 98.97565071368598,
+     "uptime_1d": 98.97907949790795,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false,
@@ -21017,8 +21017,8 @@
      "total_tokens": 982351718,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 97.46641783231426,
-     "uptime_30m": 99.90841442472811,
+     "uptime_1d": 97.47419456765002,
+     "uptime_30m": 99.90978800180424,
      "latency_30m": null,
      "is_free": false
     },
@@ -21053,7 +21053,7 @@
      "total_tokens": 30488524,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 99.97777160322312,
+     "uptime_1d": 99.97762058905806,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -21614,8 +21614,8 @@
      "total_tokens": null,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 97.07695420864657,
-     "uptime_30m": 99.32729709948272,
+     "uptime_1d": 97.07703692307466,
+     "uptime_30m": 99.32967803108382,
      "latency_30m": null,
      "is_free": false
     },
@@ -21632,8 +21632,8 @@
      "total_tokens": 5756822446,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 99.61073706875774,
-     "uptime_30m": 99.55191454693582,
+     "uptime_1d": 99.6115787853791,
+     "uptime_30m": 99.54776188278727,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -21651,8 +21651,8 @@
      "total_tokens": 5756822446,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 99.61073706875774,
-     "uptime_30m": 99.55191454693582,
+     "uptime_1d": 99.6115787853791,
+     "uptime_30m": 99.54776188278727,
      "latency_30m": null,
      "is_free": false
     },
@@ -21669,8 +21669,8 @@
      "total_tokens": 5756822446,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 99.61073706875774,
-     "uptime_30m": 99.55191454693582,
+     "uptime_1d": 99.6115787853791,
+     "uptime_30m": 99.54776188278727,
      "latency_30m": null,
      "is_free": false
     },
@@ -21705,8 +21705,8 @@
      "total_tokens": null,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 97.07695420864657,
-     "uptime_30m": 99.32729709948272,
+     "uptime_1d": 97.07703692307466,
+     "uptime_30m": 99.32967803108382,
      "latency_30m": null,
      "is_free": false
     },
@@ -21723,8 +21723,8 @@
      "total_tokens": null,
      "context": 1048576,
      "quantization": "unknown",
-     "uptime_1d": 97.07695420864657,
-     "uptime_30m": 99.32729709948272,
+     "uptime_1d": 97.07703692307466,
+     "uptime_30m": 99.32967803108382,
      "latency_30m": null,
      "is_free": false
     }
@@ -22066,8 +22066,8 @@
      "total_tokens": 30740838,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 95.95964810837602,
-     "uptime_30m": 98.60973187686196,
+     "uptime_1d": 95.93063703857536,
+     "uptime_30m": 98.54014598540147,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -22103,8 +22103,8 @@
      "total_tokens": null,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 99.65250089143895,
-     "uptime_30m": 99.39678284182307,
+     "uptime_1d": 99.65143224349113,
+     "uptime_30m": 99.51590594744121,
      "latency_30m": null,
      "is_free": false
     },
@@ -22121,8 +22121,8 @@
      "total_tokens": 89040934,
      "context": 131072,
      "quantization": "fp8",
-     "uptime_1d": 99.0483615290663,
-     "uptime_30m": 99.46691176470588,
+     "uptime_1d": 99.04775521875894,
+     "uptime_30m": 99.55440029706646,
      "latency_30m": null,
      "is_free": false
     },
@@ -22157,8 +22157,8 @@
      "total_tokens": null,
      "context": 131072,
      "quantization": "bf16",
-     "uptime_1d": 96.27811057645094,
-     "uptime_30m": 99.18032786885246,
+     "uptime_1d": 96.27955721490797,
+     "uptime_30m": 99.1304347826087,
      "latency_30m": null,
      "is_free": false
     },
@@ -22175,8 +22175,8 @@
      "total_tokens": 47770439,
      "context": 128000,
      "quantization": "fp8",
-     "uptime_1d": 97.44594283742596,
-     "uptime_30m": 92.0523138832998,
+     "uptime_1d": 97.44356578001437,
+     "uptime_30m": 92.26856561546288,
      "latency_30m": null,
      "is_free": false
     }
@@ -22519,7 +22519,7 @@
      "total_tokens": 98836101,
      "context": 128000,
      "quantization": "unknown",
-     "uptime_1d": 99.80904795914404,
+     "uptime_1d": 99.8094022269217,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -22538,8 +22538,8 @@
      "total_tokens": 38129449,
      "context": 1048576,
      "quantization": "fp8",
-     "uptime_1d": 99.74170083162677,
-     "uptime_30m": 99.96505939902165,
+     "uptime_1d": 99.74053791904944,
+     "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
     },
@@ -22574,8 +22574,8 @@
      "total_tokens": null,
      "context": 1048576,
      "quantization": "fp8",
-     "uptime_1d": 99.68955635746126,
-     "uptime_30m": 99.93031358885017,
+     "uptime_1d": 99.6879251020245,
+     "uptime_30m": 99.92088607594937,
      "latency_30m": null,
      "is_free": false
     },
@@ -22592,8 +22592,8 @@
      "total_tokens": 131459468,
      "context": 524288,
      "quantization": "fp8",
-     "uptime_1d": 99.93725392522201,
-     "uptime_30m": 99.9631879256396,
+     "uptime_1d": 99.9373831909717,
+     "uptime_30m": 99.9656652360515,
      "latency_30m": null,
      "is_free": false
     },
@@ -22628,8 +22628,8 @@
      "total_tokens": null,
      "context": 524288,
      "quantization": "unknown",
-     "uptime_1d": 99.60496328184351,
-     "uptime_30m": 88.93925657298277,
+     "uptime_1d": 99.58042383273707,
+     "uptime_30m": 87.26235741444867,
      "latency_30m": null,
      "is_free": false
     }
@@ -23589,7 +23589,7 @@
      "total_tokens": 9441991,
      "context": 262144,
      "quantization": "fp4",
-     "uptime_1d": 99.94804115140809,
+     "uptime_1d": 99.94802764929058,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -23626,7 +23626,7 @@
      "total_tokens": 7873919,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.98629799128553,
+     "uptime_1d": 99.98628897359256,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -23644,7 +23644,7 @@
      "total_tokens": null,
      "context": 262144,
      "quantization": "fp4",
-     "uptime_1d": 99.68257384193254,
+     "uptime_1d": 99.68243716023467,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -23680,7 +23680,7 @@
      "total_tokens": null,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.44087498160773,
+     "uptime_1d": 99.44213359432347,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -23843,8 +23843,8 @@
      "total_tokens": null,
      "context": 32768,
      "quantization": "unknown",
-     "uptime_1d": 99.63791368024265,
-     "uptime_30m": 99.89479221462389,
+     "uptime_1d": 99.6399445027241,
+     "uptime_30m": 99.9472851871376,
      "latency_30m": null,
      "is_free": false
     },
@@ -23861,8 +23861,8 @@
      "total_tokens": null,
      "context": 32768,
      "quantization": "unknown",
-     "uptime_1d": 99.63791368024265,
-     "uptime_30m": 99.89479221462389,
+     "uptime_1d": 99.6399445027241,
+     "uptime_30m": 99.9472851871376,
      "latency_30m": null,
      "is_free": false
     },
@@ -23897,7 +23897,7 @@
      "total_tokens": 338687,
      "context": 32768,
      "quantization": "unknown",
-     "uptime_1d": 99.96959562176954,
+     "uptime_1d": 99.96957249353416,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false,
@@ -23916,7 +23916,7 @@
      "total_tokens": 338687,
      "context": 32768,
      "quantization": "unknown",
-     "uptime_1d": 99.96959562176954,
+     "uptime_1d": 99.96957249353416,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -23934,7 +23934,7 @@
      "total_tokens": 338687,
      "context": 32768,
      "quantization": "unknown",
-     "uptime_1d": 99.96959562176954,
+     "uptime_1d": 99.96957249353416,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -24106,8 +24106,8 @@
      "total_tokens": 70925070,
      "context": 198000,
      "quantization": "fp4",
-     "uptime_1d": 99.93265625568782,
-     "uptime_30m": 99.8468606431853,
+     "uptime_1d": 99.93255436664906,
+     "uptime_30m": 99.85007496251875,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -24143,8 +24143,8 @@
      "total_tokens": 15592133,
      "context": 202752,
      "quantization": "fp4",
-     "uptime_1d": 99.93961656518894,
-     "uptime_30m": 99.21259842519686,
+     "uptime_1d": 99.93944898577051,
+     "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
     },
@@ -24161,8 +24161,8 @@
      "total_tokens": 24682012,
      "context": 202752,
      "quantization": "fp4",
-     "uptime_1d": 97.3419540229885,
-     "uptime_30m": 98.49056603773585,
+     "uptime_1d": 97.33477011494253,
+     "uptime_30m": 97.58064516129032,
      "latency_30m": null,
      "is_free": false
     },
@@ -24179,7 +24179,7 @@
      "total_tokens": 20321388,
      "context": 202752,
      "quantization": "fp8",
-     "uptime_1d": 99.9678477268343,
+     "uptime_1d": 99.96772319411271,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -24197,8 +24197,8 @@
      "total_tokens": null,
      "context": 204800,
      "quantization": "bf16",
-     "uptime_1d": 97.71024146544546,
-     "uptime_30m": 98.4251968503937,
+     "uptime_1d": 97.71087813792441,
+     "uptime_30m": 98.5355648535565,
      "latency_30m": null,
      "is_free": false
     }
@@ -24251,8 +24251,8 @@
      "total_tokens": null,
      "context": 160000,
      "quantization": "fp8",
-     "uptime_1d": 96.34112980440432,
-     "uptime_30m": 91.8552036199095,
+     "uptime_1d": 96.3245921949205,
+     "uptime_30m": 92.5233644859813,
      "latency_30m": null,
      "is_free": false
     },
@@ -24269,8 +24269,8 @@
      "total_tokens": 89548656,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.06143935720718,
-     "uptime_30m": 99.62335216572504,
+     "uptime_1d": 99.06225128897194,
+     "uptime_30m": 99.6,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -25349,8 +25349,8 @@
      "total_tokens": 207814965,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 99.3896292977937,
-     "uptime_30m": 99.37106918238993,
+     "uptime_1d": 99.38908194148638,
+     "uptime_30m": 99.47089947089947,
      "latency_30m": null,
      "is_free": false
     },
@@ -25367,8 +25367,8 @@
      "total_tokens": 207814965,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 99.3896292977937,
-     "uptime_30m": 99.37106918238993,
+     "uptime_1d": 99.38908194148638,
+     "uptime_30m": 99.47089947089947,
      "latency_30m": null,
      "is_free": false
     },
@@ -25385,8 +25385,8 @@
      "total_tokens": 207814965,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 99.3896292977937,
-     "uptime_30m": 99.37106918238993,
+     "uptime_1d": 99.38908194148638,
+     "uptime_30m": 99.47089947089947,
      "latency_30m": null,
      "is_free": false
     },
@@ -25458,8 +25458,8 @@
      "total_tokens": 2136085298,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 99.57531441942088,
-     "uptime_30m": 99.94152046783626,
+     "uptime_1d": 99.57492651966696,
+     "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -25477,8 +25477,8 @@
      "total_tokens": 2136085298,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 99.57531441942088,
-     "uptime_30m": 99.94152046783626,
+     "uptime_1d": 99.57492651966696,
+     "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
     },
@@ -25495,8 +25495,8 @@
      "total_tokens": 2136085298,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 99.57531441942088,
-     "uptime_30m": 99.94152046783626,
+     "uptime_1d": 99.57492651966696,
+     "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
     },
@@ -25513,7 +25513,7 @@
      "total_tokens": 223801032,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 99.98687836241963,
+     "uptime_1d": 99.98675672096411,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -26012,8 +26012,8 @@
      "total_tokens": 338874403,
      "context": 262144,
      "quantization": "bf16",
-     "uptime_1d": 98.7233337849841,
-     "uptime_30m": 97.71077610273589,
+     "uptime_1d": 98.72114104309755,
+     "uptime_30m": 97.87150947080649,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -26031,8 +26031,8 @@
      "total_tokens": 1146771699,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 98.10025638893906,
-     "uptime_30m": 98.19947879649372,
+     "uptime_1d": 98.09586229496887,
+     "uptime_30m": 97.62783661119516,
      "latency_30m": null,
      "is_free": false
     },
@@ -26049,7 +26049,7 @@
      "total_tokens": 151279277,
      "context": 256000,
      "quantization": "fp8",
-     "uptime_1d": 99.98267807196751,
+     "uptime_1d": 99.9825990828693,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -26067,8 +26067,8 @@
      "total_tokens": 9244157,
      "context": 262144,
      "quantization": "bf16",
-     "uptime_1d": 99.27284807323194,
-     "uptime_30m": 99.19354838709677,
+     "uptime_1d": 99.26980243893398,
+     "uptime_30m": 99.13419913419914,
      "latency_30m": null,
      "is_free": false
     },
@@ -26085,8 +26085,8 @@
      "total_tokens": 19380950,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.64215728039532,
-     "uptime_30m": 99.15611814345992,
+     "uptime_1d": 99.63841730087124,
+     "uptime_30m": 99.18533604887983,
      "latency_30m": null,
      "is_free": false
     }
@@ -26603,7 +26603,7 @@
      "total_tokens": 153361275,
      "context": 400000,
      "quantization": "unknown",
-     "uptime_1d": 97.23672057320559,
+     "uptime_1d": 97.24079125011616,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -26639,7 +26639,7 @@
      "total_tokens": 2183762,
      "context": 400000,
      "quantization": "unknown",
-     "uptime_1d": 99.99738555256347,
+     "uptime_1d": 99.99738069045,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -26702,7 +26702,7 @@
      "total_tokens": 4516829,
      "context": 204800,
      "quantization": "fp8",
-     "uptime_1d": 99.8223315566489,
+     "uptime_1d": 99.82291240975344,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -27390,8 +27390,8 @@
      "total_tokens": 222150545,
      "context": 40960,
      "quantization": "fp8",
-     "uptime_1d": 99.43811458337574,
-     "uptime_30m": 99.26262626262627,
+     "uptime_1d": 99.4384536661458,
+     "uptime_30m": 99.27450980392157,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -27427,8 +27427,8 @@
      "total_tokens": null,
      "context": 40960,
      "quantization": "fp8",
-     "uptime_1d": 98.99678243834089,
-     "uptime_30m": 99.25558312655087,
+     "uptime_1d": 98.9933606717438,
+     "uptime_30m": 99.26410466067048,
      "latency_30m": null,
      "is_free": false
     },
@@ -27445,8 +27445,8 @@
      "total_tokens": 27685325,
      "context": 131072,
      "quantization": "fp8",
-     "uptime_1d": 93.47359014336236,
-     "uptime_30m": 99.76317347542924,
+     "uptime_1d": 93.53213494681407,
+     "uptime_30m": 99.76428992339422,
      "latency_30m": null,
      "is_free": false
     },
@@ -27463,7 +27463,7 @@
      "total_tokens": 23678686,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 99.99270951044362,
+     "uptime_1d": 99.99361704067769,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -27499,7 +27499,7 @@
      "total_tokens": 3484489,
      "context": 4096,
      "quantization": "int4",
-     "uptime_1d": 99.72370658246295,
+     "uptime_1d": 99.72369819341127,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -27518,8 +27518,8 @@
      "total_tokens": 2104474,
      "context": 4096,
      "quantization": "fp16",
-     "uptime_1d": 98.71965149019816,
-     "uptime_30m": 97.52650176678446,
+     "uptime_1d": 98.71971950701233,
+     "uptime_30m": 98.54545454545455,
      "latency_30m": null,
      "is_free": false
     },
@@ -27536,7 +27536,7 @@
      "total_tokens": 3204688,
      "context": 4096,
      "quantization": "fp16",
-     "uptime_1d": 99.92102888086643,
+     "uptime_1d": 99.92112676056338,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -27572,7 +27572,7 @@
      "total_tokens": null,
      "context": 8192,
      "quantization": "fp8",
-     "uptime_1d": 99.9511201629328,
+     "uptime_1d": 99.95103240022851,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -28436,8 +28436,8 @@
      "total_tokens": 140305569,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.77923111223804,
-     "uptime_30m": 99.9741133833808,
+     "uptime_1d": 99.77986652224047,
+     "uptime_30m": 99.97441800972115,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -28455,7 +28455,7 @@
      "total_tokens": 140305569,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.7094458051238,
+     "uptime_1d": 99.7083594283097,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -28491,8 +28491,8 @@
      "total_tokens": 16435062,
      "context": 256000,
      "quantization": "fp8",
-     "uptime_1d": 99.92612656981039,
-     "uptime_30m": 99.59349593495935,
+     "uptime_1d": 99.92604644283391,
+     "uptime_30m": 99.57446808510639,
      "latency_30m": null,
      "is_free": false
     }
@@ -28555,8 +28555,8 @@
      "total_tokens": 149939244,
      "context": 400000,
      "quantization": "unknown",
-     "uptime_1d": 97.4186013590034,
-     "uptime_30m": 98.24300178677784,
+     "uptime_1d": 97.42131491364889,
+     "uptime_30m": 98.27938174394866,
      "latency_30m": null,
      "is_free": false
     },
@@ -28591,7 +28591,7 @@
      "total_tokens": 13799589,
      "context": 400000,
      "quantization": "unknown",
-     "uptime_1d": 99.99855799734672,
+     "uptime_1d": 99.99855234014215,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -30010,8 +30010,8 @@
      "total_tokens": null,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.9848277629421,
-     "uptime_30m": 99.9701501447718,
+     "uptime_1d": 99.98492325076175,
+     "uptime_30m": 99.97032728999139,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -30029,8 +30029,8 @@
      "total_tokens": 126636003,
      "context": 131072,
      "quantization": "bf16",
-     "uptime_1d": 91.44771645212485,
-     "uptime_30m": 95.55977229601518,
+     "uptime_1d": 91.3107590409845,
+     "uptime_30m": 83.85752178855627,
      "latency_30m": null,
      "is_free": false
     }
@@ -30366,7 +30366,7 @@
      "total_tokens": null,
      "context": 65536,
      "quantization": "unknown",
-     "uptime_1d": 99.883260911862,
+     "uptime_1d": 99.87660735160411,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false,
@@ -30385,8 +30385,8 @@
      "total_tokens": 15145722,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 97.76034003596534,
-     "uptime_30m": 100,
+     "uptime_1d": 97.7394930319324,
+     "uptime_30m": 99.25925925925925,
      "latency_30m": null,
      "is_free": false
     },
@@ -30704,7 +30704,7 @@
      "total_tokens": 74394,
      "context": 1050000,
      "quantization": "unknown",
-     "uptime_1d": 99.59560947429232,
+     "uptime_1d": 99.59467284308049,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -31049,7 +31049,7 @@
      "total_tokens": 2755334,
      "context": 131072,
      "quantization": "fp8",
-     "uptime_1d": 96.84232538686743,
+     "uptime_1d": 96.86391766914679,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -31085,7 +31085,7 @@
      "total_tokens": null,
      "context": 131072,
      "quantization": "bf16",
-     "uptime_1d": 98.27834826305441,
+     "uptime_1d": 98.28309305373526,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -31122,8 +31122,8 @@
      "total_tokens": 38553318,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.30833389842002,
-     "uptime_30m": 98.0392156862745,
+     "uptime_1d": 99.3051436318956,
+     "uptime_30m": 98.15845824411134,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -31141,8 +31141,8 @@
      "total_tokens": 38553318,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.19790575916231,
-     "uptime_30m": 98.89549702633815,
+     "uptime_1d": 99.19845333890689,
+     "uptime_30m": 99.1499227202473,
      "latency_30m": null,
      "is_free": false
     },
@@ -31195,8 +31195,8 @@
      "total_tokens": 71993468,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.61213848981583,
-     "uptime_30m": 99.89629245527613,
+     "uptime_1d": 99.61223901062877,
+     "uptime_30m": 99.8984771573604,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -31214,8 +31214,8 @@
      "total_tokens": 71993468,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.54312663498028,
-     "uptime_30m": 99.82788296041308,
+     "uptime_1d": 99.54163295314059,
+     "uptime_30m": 99.87012987012987,
      "latency_30m": null,
      "is_free": false
     },
@@ -31505,8 +31505,8 @@
      "total_tokens": null,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 99.95321298817788,
-     "uptime_30m": 99.98031302293533,
+     "uptime_1d": 99.95348735332733,
+     "uptime_30m": 99.98720845947213,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -31524,8 +31524,8 @@
      "total_tokens": 36149303,
      "context": 262144,
      "quantization": "bf16",
-     "uptime_1d": 97.03648937972676,
-     "uptime_30m": 97.27582292849036,
+     "uptime_1d": 96.98152564859622,
+     "uptime_30m": 96.56374501992032,
      "latency_30m": null,
      "is_free": false
     }
@@ -31797,8 +31797,8 @@
      "total_tokens": 179367051,
      "context": 400000,
      "quantization": "unknown",
-     "uptime_1d": 99.75493701786003,
-     "uptime_30m": 99.93567063364426,
+     "uptime_1d": 99.75547791436485,
+     "uptime_30m": 99.93802293151533,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -32025,8 +32025,8 @@
      "total_tokens": 339939202,
      "context": 128000,
      "quantization": "fp8",
-     "uptime_1d": 99.94208346436795,
-     "uptime_30m": 99.98262682418346,
+     "uptime_1d": 99.94222773899119,
+     "uptime_30m": 99.97332147621165,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -32044,8 +32044,8 @@
      "total_tokens": 38793368,
      "context": 131072,
      "quantization": "bf16",
-     "uptime_1d": 99.18022221649352,
-     "uptime_30m": 100,
+     "uptime_1d": 99.17832212863509,
+     "uptime_30m": 99.84779299847793,
      "latency_30m": null,
      "is_free": false
     },
@@ -32062,7 +32062,7 @@
      "total_tokens": 12668416,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 99.8236846265154,
+     "uptime_1d": 99.82382601300043,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -32180,8 +32180,8 @@
      "total_tokens": 2592436,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 99.51265524288634,
-     "uptime_30m": 99.50980392156863,
+     "uptime_1d": 99.5293379353624,
+     "uptime_30m": 99.55357142857143,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -32199,7 +32199,7 @@
      "total_tokens": 2592436,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 99.62204097871495,
+     "uptime_1d": 99.6215893248357,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -32262,8 +32262,8 @@
      "total_tokens": 18244982,
      "context": 40960,
      "quantization": "fp8",
-     "uptime_1d": 99.9752701467663,
-     "uptime_30m": 99.96525364836693,
+     "uptime_1d": 99.97518583650702,
+     "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -32299,7 +32299,7 @@
      "total_tokens": null,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 99.9950688511656,
+     "uptime_1d": 99.99507437690868,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -32426,7 +32426,7 @@
      "total_tokens": 67990697,
      "context": 1047576,
      "quantization": "unknown",
-     "uptime_1d": 99.97356614179978,
+     "uptime_1d": 99.97351486388789,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -32463,8 +32463,8 @@
      "total_tokens": 790757368,
      "context": 1047576,
      "quantization": "unknown",
-     "uptime_1d": 99.43347715133076,
-     "uptime_30m": 99.86939700845224,
+     "uptime_1d": 99.43386527534525,
+     "uptime_30m": 99.87241142408479,
      "latency_30m": null,
      "is_free": false
     }
@@ -32508,8 +32508,8 @@
      "total_tokens": 337776990,
      "context": 1047576,
      "quantization": "unknown",
-     "uptime_1d": 99.94976300627253,
-     "uptime_30m": 99.53238251110591,
+     "uptime_1d": 99.94975972660208,
+     "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -32545,8 +32545,8 @@
      "total_tokens": 241453960,
      "context": 1047576,
      "quantization": "unknown",
-     "uptime_1d": 99.12926130807412,
-     "uptime_30m": 99.76413458203261,
+     "uptime_1d": 99.12855466774344,
+     "uptime_30m": 99.72082635399218,
      "latency_30m": null,
      "is_free": false
     }
@@ -32599,8 +32599,8 @@
      "total_tokens": null,
      "context": 32000,
      "quantization": "fp8",
-     "uptime_1d": 97.98223069460283,
-     "uptime_30m": 99.95965301593705,
+     "uptime_1d": 97.98207613811417,
+     "uptime_30m": 99.96219281663517,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -32618,8 +32618,8 @@
      "total_tokens": 28716529,
      "context": 128000,
      "quantization": "fp8",
-     "uptime_1d": 99.77556109725685,
-     "uptime_30m": 99.95690583925878,
+     "uptime_1d": 99.77505623594102,
+     "uptime_30m": 99.9232245681382,
      "latency_30m": null,
      "is_free": false
     }
@@ -33969,7 +33969,7 @@
      "total_tokens": null,
      "context": 1000000,
      "quantization": "unknown",
-     "uptime_1d": 99.99762156762479,
+     "uptime_1d": 99.99761797003406,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -34381,8 +34381,8 @@
      "total_tokens": 3512387,
      "context": 256000,
      "quantization": "unknown",
-     "uptime_1d": 99.83357869807335,
-     "uptime_30m": 99.36305732484077,
+     "uptime_1d": 99.83288340403651,
+     "uptime_30m": 99.32885906040269,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -34400,7 +34400,7 @@
      "total_tokens": 1378487,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.82384441939121,
+     "uptime_1d": 99.82307147912243,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -34619,7 +34619,7 @@
      "total_tokens": null,
      "context": 1000000,
      "quantization": "unknown",
-     "uptime_1d": 99.99962042616923,
+     "uptime_1d": 99.99962039971909,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -34674,7 +34674,7 @@
      "total_tokens": null,
      "context": 1000000,
      "quantization": "unknown",
-     "uptime_1d": 99.9948498738219,
+     "uptime_1d": 99.99485358447842,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -34830,7 +34830,7 @@
      "total_tokens": 7903678,
      "context": 65536,
      "quantization": "unknown",
-     "uptime_1d": 99.99774205202311,
+     "uptime_1d": 99.99773689094077,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -34849,7 +34849,7 @@
      "total_tokens": 7903678,
      "context": 65536,
      "quantization": "unknown",
-     "uptime_1d": 99.99774205202311,
+     "uptime_1d": 99.99773689094077,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false
@@ -34903,7 +34903,7 @@
      "total_tokens": null,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 99.99903134330889,
+     "uptime_1d": 99.99903317537836,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -35004,7 +35004,7 @@
      "total_tokens": null,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.99801831080813,
+     "uptime_1d": 99.99801701401971,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -35398,7 +35398,7 @@
      "total_tokens": null,
      "context": 131072,
      "quantization": "fp8",
-     "uptime_1d": 99.9943677837229,
+     "uptime_1d": 99.99434261145056,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -35535,7 +35535,7 @@
      "total_tokens": null,
      "context": 131072,
      "quantization": "fp8",
-     "uptime_1d": 99.99817498266233,
+     "uptime_1d": 99.9981771561205,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -36278,7 +36278,7 @@
      "total_tokens": 714243,
      "context": 300000,
      "quantization": "unknown",
-     "uptime_1d": 99.92882562277579,
+     "uptime_1d": 99.92836676217765,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false
@@ -37028,8 +37028,8 @@
      "total_tokens": null,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.98373912705809,
-     "uptime_30m": 99.92256637168143,
+     "uptime_1d": 99.98373817984117,
+     "uptime_30m": 99.92111787243633,
      "latency_30m": null,
      "is_free": true
     }
@@ -37138,8 +37138,8 @@
      "total_tokens": null,
      "context": 512000,
      "quantization": "fp8",
-     "uptime_1d": 99.99254775914358,
-     "uptime_30m": 100,
+     "uptime_1d": 99.99239109142508,
+     "uptime_30m": 99.99303330082206,
      "latency_30m": null,
      "is_free": true
     }
@@ -37375,7 +37375,7 @@
      "total_tokens": 1081374096,
      "context": 1048576,
      "quantization": "fp4",
-     "uptime_1d": 99.99905872607988,
+     "uptime_1d": 99.99905809660162,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -37680,8 +37680,8 @@
      "total_tokens": 280598657,
      "context": 262144,
      "quantization": "fp8",
-     "uptime_1d": 99.87950958286359,
-     "uptime_30m": 98.73590707208746,
+     "uptime_1d": 99.8908012371163,
+     "uptime_30m": 100,
      "latency_30m": null,
      "is_free": true,
      "is_default": true
@@ -38185,7 +38185,7 @@
      "total_tokens": 57153095,
      "context": 202752,
      "quantization": "fp8",
-     "uptime_1d": 99.78111267722412,
+     "uptime_1d": 99.79672426145926,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -38997,7 +38997,7 @@
      "total_tokens": 15664995,
      "context": 262144,
      "quantization": "unknown",
-     "uptime_1d": 99.9820788530466,
+     "uptime_1d": 99.98212689901698,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false,
@@ -39330,7 +39330,7 @@
      "total_tokens": 145800791,
      "context": 131072,
      "quantization": "unknown",
-     "uptime_1d": 99.99977921630621,
+     "uptime_1d": 99.99977904800625,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -39404,7 +39404,7 @@
      "total_tokens": 3042667,
      "context": 400000,
      "quantization": "unknown",
-     "uptime_1d": 99.91878722252301,
+     "uptime_1d": 99.91867714827866,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false,
@@ -39673,7 +39673,7 @@
      "context": 131072,
      "quantization": "fp8",
      "uptime_1d": 100,
-     "uptime_30m": null,
+     "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
      "is_default": true
@@ -39746,7 +39746,7 @@
      "total_tokens": 12551177,
      "context": 128000,
      "quantization": "fp16",
-     "uptime_1d": 99.97312911460433,
+     "uptime_1d": 99.97311673099449,
      "uptime_30m": 100,
      "latency_30m": null,
      "is_free": false,
@@ -40309,7 +40309,7 @@
      "total_tokens": 2205743,
      "context": 128000,
      "quantization": "unknown",
-     "uptime_1d": 99.88784208165097,
+     "uptime_1d": 99.88804299149126,
      "uptime_30m": null,
      "latency_30m": null,
      "is_free": false,
@@ -41501,7 +41501,7 @@
    "agentic": null,
    "arena_rank": null,
    "arena": null,
-   "default_provider": "Morph",
+   "default_provider": "DeepInfra",
    "provider_count": 0,
    "providers": []
   },
